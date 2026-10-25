@@ -213,7 +213,7 @@
       context.fillText('ВСП "ЗЕФК НУ «ЗАПОРІЗЬКА ПОЛІТЕХНІКА»"', 670, 92);
       context.fillStyle = "#8fb5ff";
       context.font = '700 18px "Manrope", sans-serif';
-      context.fillText('Спеціальність 121 «Інженерія програмного забезпечення»', 670, 124);
+      context.fillText('Спеціальність F2 «Інженерія програмного забезпечення»', 670, 124);
       context.shadowColor = "rgba(251,191,36,.35)";
       context.shadowBlur = 18;
       context.fillStyle = "#fbbf24";
@@ -246,7 +246,7 @@
       context.fill();
       context.fillStyle = "#f1f5f9";
       context.font = '500 20px "Manrope", sans-serif';
-      context.fillText("успішно пройшов(ла) інтерактивні практики та завдання в межах", 600, 415);
+      context.fillText("брав(ла) участь в інтерактивних практиках та завданнях у межах", 600, 415);
       context.fillStyle = "#a78bfa";
       context.font = '800 27px "Manrope", sans-serif';
       context.fillText("🎮 Профорієнтаційного інтенсиву «IT LAB»", 600, 462);
@@ -279,7 +279,7 @@
       context.fillText(`Дата видачі: ${issued}`, 75, 720);
       context.textAlign = "right";
       context.fillText("Організаційний комітет IT LAB", 1125, 720);
-      certificateStatus.textContent = `Результат: ${results.xp} XP · завершено ігор: ${results.completedGames}.`;
+      certificateStatus.textContent = `Результат: ${results.xp} XP · зіграно ігор: ${results.playedGames} · завершено: ${results.completedGames}.`;
     }
 
     function drawCircuitDecoration(context) {

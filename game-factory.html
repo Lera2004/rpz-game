@@ -409,7 +409,7 @@ button:hover {
 <link rel="stylesheet" href="mobile.css">
 </head>
 
-<body>
+<body data-game-id="factory">
 
 <main>
 
@@ -793,6 +793,7 @@ runButton.addEventListener("click", () => {
     score += 100 + bonus;
 
     scoreEl.textContent = score;
+    window.ITLabProgress.record("factory", score);
 
     result.textContent =
       `✅ Програма виконана правильно! +${100 + bonus} XP`;

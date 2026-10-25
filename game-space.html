@@ -520,7 +520,7 @@ main{
 <link rel="stylesheet" href="mobile.css">
 </head>
 
-<body>
+<body data-game-id="space">
 
 <main>
 
@@ -1501,6 +1501,7 @@ function move(direction){
         );
 
         score += 100;
+        window.ITLabProgress.record("space", score);
 
         result.textContent =
             "⚡ Енергію зібрано! +100 очок";
@@ -1583,6 +1584,7 @@ function win(){
             100,
             1000 - moves * 10
         );
+    window.ITLabProgress.record("space", score);
 
     updateStats();
 

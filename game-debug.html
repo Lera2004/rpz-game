@@ -840,7 +840,7 @@ main{
 <link rel="stylesheet" href="mobile.css">
 </head>
 
-<body>
+<body data-game-id="debug">
 
 <main>
 
@@ -1838,6 +1838,7 @@ function checkAnswer(
             );
 
         score += gained;
+        window.ITLabProgress.record("debug", score);
 
 
         result.textContent =

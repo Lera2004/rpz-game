@@ -474,7 +474,7 @@ main{
 <link rel="stylesheet" href="mobile.css">
 </head>
 
-<body>
+<body data-game-id="css">
 
 <main>
 
@@ -936,6 +936,7 @@ function checkLevel(){
     score += gained;
 
     scoreEl.textContent = score;
+    window.ITLabProgress.record("css", score);
     comboEl.textContent = "x" + combo;
 
     result.innerHTML =

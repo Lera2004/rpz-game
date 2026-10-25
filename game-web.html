@@ -830,7 +830,7 @@ main{
 <link rel="stylesheet" href="mobile.css">
 </head>
 
-<body>
+<body data-game-id="web">
 
 <main>
 
@@ -1848,6 +1848,7 @@ function checkWebsite(){
                 50,
                 gained
             );
+        window.ITLabProgress.record("web", score);
 
 
         result.textContent =
