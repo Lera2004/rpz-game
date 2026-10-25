@@ -1,0 +1,1362 @@
+﻿<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Кібердетектив | IT LAB</title>
+
+<style>
+:root{
+  --bg:#020617;
+  --panel:#0f172a;
+  --panel2:#111c32;
+  --border:#26364d;
+  --cyan:#22d3ee;
+  --green:#34d399;
+  --red:#fb7185;
+  --yellow:#fbbf24;
+  --purple:#a78bfa;
+  --text:#e2e8f0;
+  --muted:#94a3b8;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 10% 10%,#164e6333,transparent 30%),
+    radial-gradient(circle at 90% 80%,#312e8133,transparent 35%),
+    #020617;
+  color:var(--text);
+  font-family:Manrope,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+main{
+  width:min(1050px,calc(100% - 28px));
+  margin:auto;
+  padding:18px 0 45px;
+}
+
+.nav{
+  padding:13px 16px;
+  margin-bottom:18px;
+  border:1px solid var(--border);
+  border-radius:15px;
+  background:#0f172add;
+}
+
+.nav a,
+.back{
+  color:var(--cyan);
+  font-weight:900;
+  text-decoration:none;
+}
+
+.hero{
+  padding:32px;
+  margin-bottom:18px;
+  border:1px solid #164e63;
+  border-radius:24px;
+  background:
+    radial-gradient(circle at 80% 20%,#22d3ee18,transparent 35%),
+    linear-gradient(135deg,#020617,#0c2734,#164e63);
+  position:relative;
+  overflow:hidden;
+}
+
+.hero:after{
+  content:"010101";
+  position:absolute;
+  right:-10px;
+  bottom:-50px;
+  font-family:monospace;
+  font-size:130px;
+  font-weight:900;
+  color:#22d3ee;
+  opacity:.035;
+  letter-spacing:8px;
+}
+
+.hero h1{
+  margin:0 0 8px;
+  font-size:clamp(30px,6vw,48px);
+}
+
+.hero p{
+  margin:0;
+  color:#a5f3fc;
+  max-width:700px;
+}
+
+.card{
+  padding:22px;
+  border:1px solid var(--border);
+  border-radius:22px;
+  background:#0f172af2;
+  box-shadow:0 20px 60px #0005;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+  margin-bottom:18px;
+}
+
+.stat{
+  padding:13px 8px;
+  text-align:center;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:#020617;
+}
+
+.stat small{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:900;
+  margin-bottom:4px;
+}
+
+.stat strong{
+  font-size:21px;
+}
+
+#timer{
+  color:var(--cyan);
+}
+
+#timer.danger{
+  color:var(--red);
+  animation:blink .5s infinite alternate;
+}
+
+@keyframes blink{
+  to{opacity:.35}
+}
+
+.mission{
+  padding:17px;
+  margin-bottom:18px;
+  border:1px solid #312e81;
+  border-radius:16px;
+  background:linear-gradient(135deg,#111827,#17133c);
+}
+
+.mission-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.level{
+  color:var(--purple);
+  font-weight:900;
+}
+
+.task{
+  margin:7px 0 3px;
+  font-size:18px;
+  font-weight:900;
+}
+
+.hint{
+  margin:0;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.timer-box{
+  padding:10px 14px;
+  border:1px solid #155e75;
+  border-radius:12px;
+  background:#020617;
+  font-weight:900;
+  white-space:nowrap;
+}
+
+.progress{
+  height:7px;
+  margin-top:14px;
+  overflow:hidden;
+  border-radius:20px;
+  background:#1e293b;
+}
+
+.progress-bar{
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,var(--cyan),var(--purple));
+  transition:.3s;
+}
+
+.game{
+  display:grid;
+  grid-template-columns:1.5fr .8fr;
+  gap:15px;
+}
+
+.terminal{
+  min-height:450px;
+  overflow:hidden;
+  border:1px solid #334155;
+  border-radius:17px;
+  background:#020617;
+  box-shadow:inset 0 0 40px #0008;
+}
+
+.terminal-head{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  padding:11px 14px;
+  border-bottom:1px solid #1e293b;
+  background:#0b1220;
+}
+
+.dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:#475569;
+}
+
+.dot.red{background:#ef4444}
+.dot.yellow{background:#eab308}
+.dot.green{background:#22c55e}
+
+.terminal-title{
+  margin-left:8px;
+  color:#64748b;
+  font-family:monospace;
+  font-size:12px;
+}
+
+.log{
+  padding:12px;
+  font:13px/1.65 "Courier New",monospace;
+}
+
+.log-row{
+  display:grid;
+  grid-template-columns:70px 75px 1fr;
+  gap:8px;
+  padding:7px 9px;
+  margin:3px 0;
+  border-radius:7px;
+  cursor:pointer;
+  transition:.15s;
+}
+
+.log-row:hover{
+  background:#0f172a;
+}
+
+.log-row.selected{
+  background:#164e63;
+  outline:1px solid #0891b2;
+}
+
+.log-row.correct{
+  background:#064e3b;
+  outline:1px solid var(--green);
+}
+
+.log-row.wrong{
+  background:#4c0519;
+  outline:1px solid var(--red);
+}
+
+.time{
+  color:#64748b;
+}
+
+.type{
+  color:var(--cyan);
+}
+
+.message{
+  color:#a7f3d0;
+}
+
+.warning{
+  color:var(--yellow);
+}
+
+.danger-text{
+  color:var(--red);
+}
+
+.normal{
+  color:#94a3b8;
+}
+
+.side{
+  display:flex;
+  flex-direction:column;
+  gap:13px;
+}
+
+.panel{
+  padding:17px;
+  border:1px solid var(--border);
+  border-radius:16px;
+  background:#020617;
+}
+
+.panel h3{
+  margin:0 0 12px;
+  font-size:15px;
+}
+
+.evidence{
+  min-height:110px;
+  color:#64748b;
+  font:12px/1.7 monospace;
+}
+
+.evidence .found{
+  color:var(--green);
+}
+
+.tools{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.tool{
+  padding:10px 7px;
+  border:1px solid #334155;
+  border-radius:10px;
+  background:#111827;
+  color:#cbd5e1;
+  font:inherit;
+  font-size:12px;
+  font-weight:900;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.tool:hover{
+  border-color:var(--cyan);
+  color:#fff;
+  transform:translateY(-1px);
+}
+
+.tool.active{
+  border-color:var(--cyan);
+  background:#083344;
+  color:var(--cyan);
+}
+
+.result{
+  min-height:48px;
+  padding:12px;
+  border:1px solid #1e293b;
+  border-radius:12px;
+  background:#020617;
+  color:#94a3b8;
+  font-weight:800;
+  font-size:13px;
+}
+
+.actions{
+  display:flex;
+  gap:9px;
+}
+
+.action{
+  flex:1;
+  padding:12px;
+  border:0;
+  border-radius:11px;
+  background:var(--cyan);
+  color:#042f3b;
+  font:inherit;
+  font-weight:1000;
+  cursor:pointer;
+}
+
+.action.secondary{
+  background:#1e293b;
+  color:#cbd5e1;
+}
+
+.action:hover{
+  filter:brightness(1.1);
+}
+
+.action:disabled{
+  opacity:.4;
+  cursor:not-allowed;
+}
+
+.back{
+  display:inline-block;
+  margin-top:18px;
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:#000b;
+  backdrop-filter:blur(8px);
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:min(500px,100%);
+  padding:30px;
+  border:1px solid #334155;
+  border-radius:23px;
+  background:#0f172a;
+  box-shadow:0 30px 100px #000;
+  text-align:center;
+  animation:pop .3s;
+}
+
+@keyframes pop{
+  from{
+    opacity:0;
+    transform:scale(.8);
+  }
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+.modal-icon{
+  font-size:60px;
+}
+
+.modal h2{
+  margin:10px 0;
+}
+
+.final-score{
+  margin:15px 0;
+  color:var(--cyan);
+  font-size:42px;
+  font-weight:1000;
+}
+
+.modal button{
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:12px;
+  background:var(--cyan);
+  color:#042f3b;
+  font-weight:1000;
+  cursor:pointer;
+}
+
+.shake{
+  animation:shake .35s;
+}
+
+@keyframes shake{
+  20%{transform:translateX(-8px)}
+  40%{transform:translateX(8px)}
+  60%{transform:translateX(-5px)}
+  80%{transform:translateX(5px)}
+}
+
+.scan{
+  animation:scan .7s;
+}
+
+@keyframes scan{
+  0%{background:#164e63}
+  100%{background:transparent}
+}
+
+@media(max-width:800px){
+
+  .stats{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .game{
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:500px){
+
+  .hero,
+  .card{
+    padding:17px;
+  }
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .log-row{
+    grid-template-columns:60px 65px 1fr;
+    font-size:11px;
+  }
+
+  .mission-top{
+    align-items:flex-start;
+  }
+
+}
+</style>
+<link rel="stylesheet" href="mobile.css">
+</head>
+
+<body>
+
+<main>
+
+<nav class="nav">
+  <a href="games.html">← Усі ігри</a>
+</nav>
+
+<header class="hero">
+  <h1>🕵️ Кібердетектив</h1>
+  <p>
+    У серверній системі сталася підозріла активність.
+    Проаналізуй журнали, знайди цифрові сліди та встанови,
+    що відбулося.
+  </p>
+</header>
+
+<section class="card">
+
+  <div class="stats">
+
+    <div class="stat">
+      <small>СПРАВА</small>
+      <strong id="level">1/8</strong>
+    </div>
+
+    <div class="stat">
+      <small>ОЧКИ</small>
+      <strong id="score">0</strong>
+    </div>
+
+    <div class="stat">
+      <small>КОМБО</small>
+      <strong id="combo">x0</strong>
+    </div>
+
+    <div class="stat">
+      <small>СЛІДИ</small>
+      <strong id="clues">0</strong>
+    </div>
+
+    <div class="stat">
+      <small>ЧАС</small>
+      <strong id="timer">30с</strong>
+    </div>
+
+  </div>
+
+
+  <div class="mission">
+
+    <div class="mission-top">
+
+      <div>
+
+        <div class="level" id="levelTitle">
+          Справа №1
+        </div>
+
+        <div class="task" id="task">
+          Знайди підозрілий вхід до системи
+        </div>
+
+        <p class="hint" id="hint">
+          Один із записів відрізняється від звичайної поведінки.
+        </p>
+
+      </div>
+
+      <div class="timer-box">
+        ⏱ <span id="timer2">30</span>с
+      </div>
+
+    </div>
+
+    <div class="progress">
+      <div class="progress-bar" id="progress"></div>
+    </div>
+
+  </div>
+
+
+  <div class="game">
+
+    <!-- ТЕРМІНАЛ -->
+
+    <div class="terminal">
+
+      <div class="terminal-head">
+
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+
+        <span class="terminal-title">
+          security@it-lab: /var/log/auth.log
+        </span>
+
+      </div>
+
+      <div class="log" id="log"></div>
+
+    </div>
+
+
+    <!-- ПАНЕЛЬ ДЕТЕКТИВА -->
+
+    <aside class="side">
+
+      <div class="panel">
+
+        <h3>🔎 Інструменти</h3>
+
+        <div class="tools">
+
+          <button class="tool" data-tool="ip">
+            🌐 IP Scan
+          </button>
+
+          <button class="tool" data-tool="time">
+            ⏱ Time Scan
+          </button>
+
+          <button class="tool" data-tool="user">
+            👤 User Scan
+          </button>
+
+          <button class="tool" data-tool="danger">
+            ⚠ Threat Scan
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="panel">
+
+        <h3>🧩 Зібрані докази</h3>
+
+        <div class="evidence" id="evidence">
+          Доказів поки немає...
+        </div>
+
+      </div>
+
+
+      <div class="panel">
+
+        <h3>📋 Результат аналізу</h3>
+
+        <div class="result" id="result">
+          Обери запис журналу, який вважаєш підозрілим.
+        </div>
+
+      </div>
+
+
+      <div class="actions">
+
+        <button class="action secondary" id="reset">
+          ↩ Скинути
+        </button>
+
+        <button class="action" id="investigate">
+          🔍 Розслідувати
+        </button>
+
+      </div>
+
+    </aside>
+
+  </div>
+
+
+  <a class="back" href="games.html">
+    ← Повернутися до ігор
+  </a>
+
+</section>
+
+</main>
+
+
+<!-- MODAL -->
+
+<div class="modal" id="modal">
+
+  <div class="modal-box">
+
+    <div class="modal-icon" id="modalIcon">
+      🕵️
+    </div>
+
+    <h2 id="modalTitle">
+      Справу завершено!
+    </h2>
+
+    <p id="modalText">
+      Ти завершив розслідування.
+    </p>
+
+    <div class="final-score" id="finalScore">
+      0
+    </div>
+
+    <button id="restart">
+      🔄 Нова справа
+    </button>
+
+  </div>
+
+</div>
+
+
+<script src="game-progress.js"></script>
+<script>
+
+/* =====================================
+   ІГРОВІ РІВНІ
+===================================== */
+
+const levels = [
+
+  {
+    title:"Справа №1 — Підозрілий вхід",
+    task:"Знайди підозрілий вхід до системи",
+    hint:"Зверни увагу на незвичайний тип доступу.",
+    time:30,
+
+    logs:[
+      ["14:03","LOGIN","USER student01"],
+      ["14:04","FILE","opened /home/student"],
+      ["14:05","LOGIN","USER admin"],
+      ["14:06","ACCESS","UNKNOWN ACCESS"],
+      ["14:07","FILE","opened /var/www"],
+      ["14:08","LOGOUT","USER student01"]
+    ],
+
+    correct:3
+  },
+
+  {
+    title:"Справа №2 — Дивний IP",
+    task:"Знайди підключення з підозрілої IP-адреси",
+    hint:"Звичайна локальна мережа використовує 192.168.x.x.",
+    time:32,
+
+    logs:[
+      ["09:12","LOGIN","IP 192.168.1.21"],
+      ["09:13","LOGIN","IP 192.168.1.25"],
+      ["09:14","LOGIN","IP 10.0.0.15"],
+      ["09:15","LOGIN","IP 185.44.91.27"],
+      ["09:16","FILE","opened document"],
+      ["09:17","LOGOUT","USER teacher"]
+    ],
+
+    correct:3
+  },
+
+  {
+    title:"Справа №3 — Нічний гість",
+    task:"Знайди вхід у систему в небезпечний час",
+    hint:"Хтось увійшов тоді, коли сервер майже не використовувався.",
+    time:32,
+
+    logs:[
+      ["21:04","LOGIN","USER admin"],
+      ["21:30","FILE","opened database"],
+      ["23:11","LOGIN","USER teacher"],
+      ["02:47","LOGIN","USER root"],
+      ["08:05","LOGIN","USER student"],
+      ["08:10","FILE","opened schedule"]
+    ],
+
+    correct:3
+  },
+
+  {
+    title:"Справа №4 — Зламаний пароль",
+    task:"Знайди серію невдалих спроб входу",
+    hint:"Багато невдалих входів підряд можуть бути ознакою атаки.",
+    time:34,
+
+    logs:[
+      ["11:01","LOGIN","USER admin SUCCESS"],
+      ["11:02","LOGIN","USER student SUCCESS"],
+      ["11:03","LOGIN","USER admin FAILED"],
+      ["11:03","LOGIN","USER admin FAILED"],
+      ["11:04","LOGIN","USER admin FAILED"],
+      ["11:05","LOGIN","USER admin SUCCESS"]
+    ],
+
+    correct:4
+  },
+
+  {
+    title:"Справа №5 — Викрадення файлів",
+    task:"Знайди підозріле копіювання даних",
+    hint:"Зверни увагу на операції з великою кількістю файлів.",
+    time:35,
+
+    logs:[
+      ["16:01","FILE","opened lesson.docx"],
+      ["16:02","FILE","saved lesson.docx"],
+      ["16:03","FILE","opened schedule.xlsx"],
+      ["16:04","EXPORT","248 files → external"],
+      ["16:05","FILE","closed schedule.xlsx"],
+      ["16:06","LOGOUT","USER admin"]
+    ],
+
+    correct:3
+  },
+
+  {
+    title:"Справа №6 — Root",
+    task:"Знайди небезпечну команду адміністратора",
+    hint:"Не кожна команда root є нормальною.",
+    time:36,
+
+    logs:[
+      ["18:01","CMD","ls /home"],
+      ["18:02","CMD","cat schedule.txt"],
+      ["18:03","CMD","whoami"],
+      ["18:04","CMD","rm -rf /var/www"],
+      ["18:05","CMD","cd /home"],
+      ["18:06","LOGOUT","USER admin"]
+    ],
+
+    correct:3
+  },
+
+  {
+    title:"Справа №7 — Витік",
+    task:"Знайди спробу передати секретні дані",
+    hint:"Шукай незвичайний зовнішній канал передачі.",
+    time:38,
+
+    logs:[
+      ["20:10","FILE","opened students.db"],
+      ["20:11","FILE","read students.db"],
+      ["20:12","HTTP","GET /api/groups"],
+      ["20:13","UPLOAD","database → unknown-server"],
+      ["20:14","FILE","closed students.db"],
+      ["20:15","LOGOUT","USER admin"]
+    ],
+
+    correct:3
+  },
+
+  {
+    title:"ФІНАЛ — Кібератака",
+    task:"Знайди головний доказ атаки",
+    hint:"Проаналізуй усі ознаки. Один запис є ключовим.",
+    time:40,
+
+    logs:[
+      ["03:01","LOGIN","IP 192.168.1.20"],
+      ["03:02","LOGIN","IP 192.168.1.20"],
+      ["03:03","ACCESS","root privileges"],
+      ["03:04","UPLOAD","database → external"],
+      ["03:05","DELETE","security logs"],
+      ["03:06","LOGOUT","USER admin"]
+    ],
+
+    correct:4
+  }
+
+];
+
+
+/* =====================================
+   STATE
+===================================== */
+
+let level = 0;
+let score = 0;
+let combo = 0;
+let clues = 0;
+let selectedRow = null;
+let selectedTool = null;
+let timeLeft = 30;
+let timer = null;
+let completed = false;
+
+
+/* =====================================
+   ELEMENTS
+===================================== */
+
+const logEl = document.getElementById("log");
+const resultEl = document.getElementById("result");
+const evidenceEl = document.getElementById("evidence");
+
+const levelEl = document.getElementById("level");
+const scoreEl = document.getElementById("score");
+const comboEl = document.getElementById("combo");
+const cluesEl = document.getElementById("clues");
+
+const timerEl = document.getElementById("timer");
+const timer2El = document.getElementById("timer2");
+
+const levelTitleEl = document.getElementById("levelTitle");
+const taskEl = document.getElementById("task");
+const hintEl = document.getElementById("hint");
+
+const progressEl = document.getElementById("progress");
+
+const modal = document.getElementById("modal");
+const modalIcon = document.getElementById("modalIcon");
+const modalTitle = document.getElementById("modalTitle");
+const modalText = document.getElementById("modalText");
+const finalScore = document.getElementById("finalScore");
+
+
+/* =====================================
+   ЗАВАНТАЖЕННЯ РІВНЯ
+===================================== */
+
+function loadLevel(){
+
+  const data = levels[level];
+
+  completed = false;
+  selectedRow = null;
+  selectedTool = null;
+
+  levelEl.textContent =
+    `${level + 1}/${levels.length}`;
+
+  levelTitleEl.textContent =
+    data.title;
+
+  taskEl.textContent =
+    data.task;
+
+  hintEl.textContent =
+    data.hint;
+
+  progressEl.style.width =
+    ((level / levels.length) * 100) + "%";
+
+  renderLogs(data);
+
+  resultEl.textContent =
+    "Обери підозрілий запис та проведи розслідування.";
+
+  evidenceEl.innerHTML =
+    "Доказів поки немає...";
+
+  document.querySelectorAll(".tool")
+    .forEach(x=>x.classList.remove("active"));
+
+  startTimer();
+
+}
+
+
+/* =====================================
+   ЛОГИ
+===================================== */
+
+function renderLogs(data){
+
+  logEl.innerHTML = "";
+
+  data.logs.forEach((row,index)=>{
+
+    const div = document.createElement("div");
+
+    div.className = "log-row";
+
+    let typeClass = "type";
+
+    if(row[1] === "ACCESS" ||
+       row[1] === "DELETE" ||
+       row[1] === "UPLOAD"){
+      typeClass = "type danger-text";
+    }
+
+    div.innerHTML = `
+      <span class="time">${row[0]}</span>
+      <span class="${typeClass}">${row[1]}</span>
+      <span class="message">${row[2]}</span>
+    `;
+
+    div.addEventListener("click",()=>{
+
+      if(completed) return;
+
+      document
+        .querySelectorAll(".log-row")
+        .forEach(x=>x.classList.remove("selected"));
+
+      div.classList.add("selected");
+
+      selectedRow = index;
+
+      resultEl.textContent =
+        `📌 Обрано: ${row[1]} — ${row[2]}`;
+
+    });
+
+    logEl.appendChild(div);
+
+  });
+
+}
+
+
+/* =====================================
+   ІНСТРУМЕНТИ
+===================================== */
+
+document.querySelectorAll(".tool")
+.forEach(button=>{
+
+  button.addEventListener("click",()=>{
+
+    if(completed) return;
+
+    selectedTool = button.dataset.tool;
+
+    document.querySelectorAll(".tool")
+      .forEach(x=>x.classList.remove("active"));
+
+    button.classList.add("active");
+
+    runTool(selectedTool);
+
+  });
+
+});
+
+
+function runTool(tool){
+
+  if(selectedRow === null){
+
+    resultEl.textContent =
+      "⚠ Спочатку вибери запис журналу.";
+
+    return;
+
+  }
+
+  const data = levels[level];
+  const row = data.logs[selectedRow];
+
+  let text = "";
+
+  if(tool === "ip"){
+
+    text =
+      `🌐 IP ANALYSIS\n` +
+      `Запис: ${row[2]}\n` +
+      `Статус: перевірено`;
+
+  }
+
+  if(tool === "time"){
+
+    text =
+      `⏱ TIME ANALYSIS\n` +
+      `Час події: ${row[0]}\n` +
+      `Активність: проаналізовано`;
+
+  }
+
+  if(tool === "user"){
+
+    text =
+      `👤 USER ANALYSIS\n` +
+      `Подія: ${row[2]}\n` +
+      `Обліковий запис: перевірено`;
+
+  }
+
+  if(tool === "danger"){
+
+    text =
+      `⚠ THREAT SCAN\n` +
+      `Тип: ${row[1]}\n` +
+      `Рівень ризику: ${selectedRow === data.correct ? "ВИСОКИЙ" : "НЕВИЗНАЧЕНИЙ"}`;
+
+  }
+
+  resultEl.innerHTML =
+    text.replace(/\n/g,"<br>");
+
+}
+
+
+/* =====================================
+   РОЗСЛІДУВАННЯ
+===================================== */
+
+document
+  .getElementById("investigate")
+  .addEventListener("click",investigate);
+
+
+function investigate(){
+
+  if(completed) return;
+
+  if(selectedRow === null){
+
+    resultEl.textContent =
+      "🔎 Вибери запис, який потрібно дослідити.";
+
+    return;
+
+  }
+
+  const data = levels[level];
+
+  const rows =
+    document.querySelectorAll(".log-row");
+
+  if(selectedRow === data.correct){
+
+    completed = true;
+
+    clearInterval(timer);
+
+    rows[selectedRow].classList.add("correct");
+
+    combo++;
+
+    clues++;
+
+    const timeBonus =
+      Math.max(0,timeLeft * 4);
+
+    const comboBonus =
+      combo * 35;
+
+    const gained =
+      100 + timeBonus + comboBonus;
+
+    score += gained;
+
+    scoreEl.textContent = score;
+    comboEl.textContent = "x" + combo;
+    cluesEl.textContent = clues;
+
+    evidenceEl.innerHTML += `
+      <div class="found">
+        ✓ ${data.logs[selectedRow][0]}
+        — ${data.logs[selectedRow][1]}
+        — ключовий доказ
+      </div>
+    `;
+
+    resultEl.innerHTML =
+      `✅ <strong>Правильний слід!</strong><br>
+       +${gained} очок. Комбо x${combo}`;
+
+    setTimeout(()=>{
+
+      if(level < levels.length - 1){
+
+        level++;
+        loadLevel();
+
+      }else{
+
+        finishGame();
+
+      }
+
+    },1500);
+
+  }else{
+
+    rows[selectedRow].classList.add("wrong");
+
+    combo = 0;
+
+    comboEl.textContent = "x0";
+
+    resultEl.innerHTML =
+      "❌ Це не головний доказ. Проаналізуй інші записи.";
+
+    document.querySelector(".terminal")
+      .classList.add("shake");
+
+    setTimeout(()=>{
+      document.querySelector(".terminal")
+        .classList.remove("shake");
+    },400);
+
+  }
+
+}
+
+
+/* =====================================
+   ТАЙМЕР
+===================================== */
+
+function startTimer(){
+
+  clearInterval(timer);
+
+  timeLeft = levels[level].time;
+
+  updateTimer();
+
+  timer = setInterval(()=>{
+
+    timeLeft--;
+
+    updateTimer();
+
+    if(timeLeft <= 0){
+
+      clearInterval(timer);
+
+      combo = 0;
+
+      comboEl.textContent = "x0";
+
+      resultEl.innerHTML =
+        "⏰ <strong>Час вийшов!</strong> Спробуй розібрати справу ще раз.";
+
+      loadLevel();
+
+    }
+
+  },1000);
+
+}
+
+
+function updateTimer(){
+
+  timerEl.textContent =
+    timeLeft + "с";
+
+  timer2El.textContent =
+    timeLeft;
+
+  timerEl.classList.toggle(
+    "danger",
+    timeLeft <= 7
+  );
+
+}
+
+
+/* =====================================
+   RESET
+===================================== */
+
+document
+  .getElementById("reset")
+  .addEventListener("click",()=>{
+
+    selectedRow = null;
+
+    document.querySelectorAll(".log-row")
+      .forEach(x=>{
+        x.classList.remove("selected","wrong","correct");
+      });
+
+    document.querySelectorAll(".tool")
+      .forEach(x=>x.classList.remove("active"));
+
+    resultEl.textContent =
+      "Справу скинуто. Проаналізуй журнал ще раз.";
+
+    startTimer();
+
+  });
+
+
+/* =====================================
+   ФІНАЛ
+===================================== */
+
+function finishGame(){
+
+  clearInterval(timer);
+  window.ITLabProgress.complete("cyber", score);
+
+  progressEl.style.width = "100%";
+
+  modalIcon.textContent = "🕵️‍♂️";
+  modalTitle.textContent = "КІБЕРДЕТЕКТИВ!";
+  modalText.textContent =
+    "Ти розкрив усі справи та знайшов ключові цифрові сліди.";
+
+  finalScore.textContent =
+    score + " очок";
+
+  modal.classList.add("show");
+
+}
+
+
+/* =====================================
+   RESTART
+===================================== */
+
+document
+  .getElementById("restart")
+  .addEventListener("click",()=>{
+
+    modal.classList.remove("show");
+
+    level = 0;
+    score = 0;
+    combo = 0;
+    clues = 0;
+
+    scoreEl.textContent = "0";
+    comboEl.textContent = "x0";
+    cluesEl.textContent = "0";
+
+    loadLevel();
+
+  });
+
+
+/* =====================================
+   START
+===================================== */
+
+loadLevel();
+
+</script>
+
+</body>
+</html>

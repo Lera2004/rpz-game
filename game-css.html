@@ -1,0 +1,1260 @@
+﻿<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CSS-магія | IT LAB</title>
+
+<style>
+:root{
+  --p:#4f46e5;
+  --purple:#7c3aed;
+  --cyan:#0891b2;
+  --green:#16a34a;
+  --red:#ef4444;
+  --yellow:#f59e0b;
+  --dark:#0f172a;
+  --muted:#64748b;
+  --bg:#f5f7fb;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 10% 10%,#ddd6fe55,transparent 30%),
+    radial-gradient(circle at 90% 80%,#bae6fd55,transparent 30%),
+    var(--bg);
+  color:var(--dark);
+  font-family:Manrope,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+main{
+  width:min(1050px,calc(100% - 28px));
+  margin:auto;
+  padding:18px 0 40px;
+}
+
+.nav{
+  background:#fff;
+  border:1px solid #dbe5f2;
+  border-radius:18px;
+  box-shadow:0 10px 25px #0f172a0b;
+  padding:13px 16px;
+  margin-bottom:18px;
+}
+
+.nav a,
+.back{
+  color:var(--p);
+  font-weight:900;
+  text-decoration:none;
+}
+
+.hero{
+  padding:32px;
+  border-radius:25px;
+  color:#fff;
+  background:
+    radial-gradient(circle at 80% 20%,#a78bfa55,transparent 30%),
+    linear-gradient(135deg,#0f172a,#4c1d95,#7c3aed);
+  margin-bottom:18px;
+  position:relative;
+  overflow:hidden;
+}
+
+.hero:after{
+  content:"{ }";
+  position:absolute;
+  right:30px;
+  bottom:-35px;
+  font-size:150px;
+  font-weight:900;
+  opacity:.08;
+}
+
+.hero h1{
+  margin:0 0 8px;
+  font-size:clamp(30px,6vw,48px);
+}
+
+.hero p{
+  margin:0;
+  color:#e9d5ff;
+  font-size:17px;
+  max-width:650px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid #dbe5f2;
+  border-radius:22px;
+  box-shadow:0 12px 30px #0f172a0c;
+  padding:24px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.stat{
+  padding:15px;
+  border-radius:16px;
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+  text-align:center;
+}
+
+.stat small{
+  display:block;
+  color:var(--muted);
+  font-weight:800;
+  margin-bottom:5px;
+}
+
+.stat strong{
+  font-size:24px;
+}
+
+#lives{
+  letter-spacing:3px;
+}
+
+.mission{
+  padding:18px;
+  border-radius:17px;
+  background:linear-gradient(135deg,#eef2ff,#faf5ff);
+  border:1px solid #c7d2fe;
+  margin-bottom:18px;
+}
+
+.mission-top{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  align-items:center;
+}
+
+.level{
+  color:var(--p);
+  font-weight:900;
+}
+
+.task{
+  font-size:19px;
+  font-weight:900;
+  margin:8px 0 5px;
+}
+
+.hint-text{
+  color:var(--muted);
+  font-size:14px;
+  margin:0;
+}
+
+.timer{
+  min-width:80px;
+  text-align:center;
+  padding:9px 12px;
+  border-radius:12px;
+  background:#fff;
+  border:1px solid #ddd6fe;
+  font-weight:900;
+  color:var(--purple);
+}
+
+.timer.danger{
+  color:var(--red);
+  animation:shake .3s infinite alternate;
+}
+
+@keyframes shake{
+  to{transform:translateX(2px)}
+}
+
+.game{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+
+.panel{
+  border:1px solid #e2e8f0;
+  border-radius:18px;
+  padding:18px;
+  background:#fff;
+}
+
+.panel h3{
+  margin:0 0 14px;
+}
+
+.preview{
+  min-height:320px;
+  display:grid;
+  place-items:center;
+  border-radius:16px;
+  background:
+    linear-gradient(45deg,#f8fafc 25%,transparent 25%),
+    linear-gradient(-45deg,#f8fafc 25%,transparent 25%),
+    linear-gradient(45deg,transparent 75%,#f8fafc 75%),
+    linear-gradient(-45deg,transparent 75%,#f8fafc 75%);
+  background-size:28px 28px;
+  background-position:0 0,0 14px,14px -14px,-14px 0;
+  padding:25px;
+  overflow:hidden;
+}
+
+.target{
+  width:min(100%,300px);
+  min-height:160px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:14px;
+  padding:25px;
+  background:#fff;
+  border-radius:16px;
+  box-shadow:0 15px 35px #0f172a18;
+  transition:.3s;
+}
+
+.target button{
+  cursor:pointer;
+  border:0;
+  padding:13px 24px;
+  border-radius:9px;
+  color:#fff;
+  background:#2563eb;
+  font-weight:900;
+  font-size:15px;
+  transition:.3s;
+}
+
+.controls{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.css-btn{
+  padding:13px 10px;
+  border:1px solid #c7d2fe;
+  border-radius:12px;
+  color:#3730a3;
+  background:#eef2ff;
+  font:inherit;
+  font-weight:900;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.css-btn:hover{
+  transform:translateY(-2px);
+  background:#e0e7ff;
+}
+
+.css-btn.used{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
+.progress{
+  height:9px;
+  background:#e2e8f0;
+  border-radius:99px;
+  overflow:hidden;
+  margin-top:14px;
+}
+
+.progress-bar{
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,var(--p),var(--purple));
+  transition:.3s;
+}
+
+.selected{
+  margin-top:15px;
+  padding:12px;
+  border-radius:12px;
+  background:#f8fafc;
+  color:#475569;
+  font-size:14px;
+  min-height:45px;
+}
+
+.selected span{
+  display:inline-block;
+  padding:4px 8px;
+  margin:3px;
+  border-radius:7px;
+  background:#ede9fe;
+  color:#5b21b6;
+  font-weight:900;
+}
+
+.result{
+  margin-top:18px;
+  padding:14px;
+  border-radius:13px;
+  background:#f8fafc;
+  color:#475569;
+  font-weight:800;
+  text-align:center;
+  min-height:48px;
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  margin-top:18px;
+}
+
+.action{
+  flex:1;
+  border:0;
+  border-radius:12px;
+  padding:13px;
+  color:#fff;
+  background:var(--p);
+  font-weight:900;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.action:hover{
+  transform:translateY(-2px);
+}
+
+.action.secondary{
+  color:#3730a3;
+  background:#eef2ff;
+}
+
+.action:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
+
+.combo{
+  color:var(--yellow);
+}
+
+.correct{
+  animation:correct .5s;
+}
+
+@keyframes correct{
+  30%{transform:scale(1.04)}
+  60%{transform:scale(.98)}
+  100%{transform:scale(1)}
+}
+
+.wrong{
+  animation:wrong .35s;
+}
+
+@keyframes wrong{
+  25%{transform:translateX(-8px)}
+  50%{transform:translateX(8px)}
+  75%{transform:translateX(-5px)}
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:#020617bb;
+  backdrop-filter:blur(7px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:50;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:min(500px,100%);
+  background:#fff;
+  border-radius:25px;
+  padding:30px;
+  text-align:center;
+  box-shadow:0 30px 80px #0005;
+  animation:pop .35s;
+}
+
+@keyframes pop{
+  from{transform:scale(.8);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+.modal-icon{
+  font-size:60px;
+}
+
+.modal h2{
+  margin:10px 0;
+  font-size:30px;
+}
+
+.final-score{
+  font-size:42px;
+  font-weight:1000;
+  color:var(--p);
+  margin:15px 0;
+}
+
+.modal button{
+  width:100%;
+  border:0;
+  border-radius:12px;
+  padding:14px;
+  background:var(--p);
+  color:#fff;
+  font-weight:900;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.back{
+  display:inline-block;
+  margin-top:18px;
+}
+
+@media(max-width:750px){
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .game{
+    grid-template-columns:1fr;
+  }
+
+  .mission-top{
+    align-items:flex-start;
+  }
+
+  .timer{
+    min-width:70px;
+  }
+}
+
+@media(max-width:480px){
+  .hero,
+  .card{
+    padding:18px;
+  }
+
+  .controls{
+    grid-template-columns:1fr;
+  }
+
+  .stats{
+    gap:8px;
+  }
+
+  .stat{
+    padding:11px 5px;
+  }
+
+  .stat strong{
+    font-size:20px;
+  }
+}
+</style>
+<link rel="stylesheet" href="mobile.css">
+</head>
+
+<body>
+
+<main>
+
+<nav class="nav">
+  <a href="games.html">← Усі ігри</a>
+</nav>
+
+<header class="hero">
+  <h1>🎨 CSS-магія</h1>
+  <p>
+    Ти — CSS-магістр. Виконуй завдання, змінюй властивості елементів
+    та прокачуй свій рівень!
+  </p>
+</header>
+
+<section class="card">
+
+  <div class="stats">
+
+    <div class="stat">
+      <small>РІВЕНЬ</small>
+      <strong id="level">1/8</strong>
+    </div>
+
+    <div class="stat">
+      <small>ОЧКИ</small>
+      <strong id="score">0</strong>
+    </div>
+
+    <div class="stat">
+      <small>КОМБО</small>
+      <strong class="combo" id="combo">x0</strong>
+    </div>
+
+    <div class="stat">
+      <small>ЖИТТЯ</small>
+      <strong id="lives">❤️❤️❤️</strong>
+    </div>
+
+  </div>
+
+  <div class="mission">
+
+    <div class="mission-top">
+
+      <div>
+        <div class="level" id="levelTitle">
+          Рівень 1 — Новачок
+        </div>
+
+        <div class="task" id="task">
+          Зроби кнопку червоною
+        </div>
+
+        <p class="hint-text" id="hint">
+          Використай правильну CSS-властивість.
+        </p>
+      </div>
+
+      <div class="timer" id="timer">
+        20с
+      </div>
+
+    </div>
+
+    <div class="progress">
+      <div class="progress-bar" id="progress"></div>
+    </div>
+
+  </div>
+
+  <div class="game">
+
+    <!-- ПРЕВ'Ю -->
+
+    <div class="panel">
+
+      <h3>🖥️ Твій елемент</h3>
+
+      <div class="preview">
+
+        <div class="target" id="target">
+
+          <div id="targetIcon" style="font-size:40px">
+            ✨
+          </div>
+
+          <strong id="targetText">
+            CSS Button
+          </strong>
+
+          <button id="demo">
+            Натисни мене
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- CSS ПАНЕЛЬ -->
+
+    <div class="panel">
+
+      <h3>🪄 CSS-панель</h3>
+
+      <div class="controls">
+
+        <button class="css-btn" data-style="red">
+          🔴 background
+        </button>
+
+        <button class="css-btn" data-style="round">
+          ⚪ border-radius
+        </button>
+
+        <button class="css-btn" data-style="shadow">
+          🌑 box-shadow
+        </button>
+
+        <button class="css-btn" data-style="big">
+          🔍 transform
+        </button>
+
+        <button class="css-btn" data-style="pulse">
+          💓 animation
+        </button>
+
+        <button class="css-btn" data-style="rotate">
+          🔄 rotate
+        </button>
+
+        <button class="css-btn" data-style="gradient">
+          🌈 gradient
+        </button>
+
+        <button class="css-btn" data-style="glow">
+          ✨ glow
+        </button>
+
+      </div>
+
+      <div class="selected" id="selected">
+        Обрані властивості:
+        <br>
+        <span style="background:#f1f5f9;color:#64748b">
+          поки що немає
+        </span>
+      </div>
+
+      <div class="result" id="result">
+        🎯 Виконай завдання рівня!
+      </div>
+
+      <div class="actions">
+
+        <button class="action secondary" id="reset">
+          ↩ Скинути
+        </button>
+
+        <button class="action" id="check">
+          ✓ Перевірити
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <a class="back" href="games.html">
+    ← Повернутися до ігор
+  </a>
+
+</section>
+
+</main>
+
+
+<!-- MODAL -->
+
+<div class="modal" id="modal">
+
+  <div class="modal-box">
+
+    <div class="modal-icon" id="modalIcon">
+      🏆
+    </div>
+
+    <h2 id="modalTitle">
+      CSS-майстер!
+    </h2>
+
+    <p id="modalText">
+      Ти пройшов усі рівні.
+    </p>
+
+    <div class="final-score" id="finalScore">
+      0
+    </div>
+
+    <button id="restart">
+      🔄 Грати ще раз
+    </button>
+
+  </div>
+
+</div>
+
+
+<script src="game-progress.js"></script>
+<script>
+
+const levels = [
+
+  {
+    title:"Рівень 1 — Новачок",
+    task:"Зроби кнопку червоною",
+    hint:"Потрібно змінити її background.",
+    required:["red"],
+    time:20,
+    points:100
+  },
+
+  {
+    title:"Рівень 2 — Округлювач",
+    task:"Зроби кнопку круглою та додай тінь",
+    hint:"Спробуй border-radius і box-shadow.",
+    required:["round","shadow"],
+    time:22,
+    points:150
+  },
+
+  {
+    title:"Рівень 3 — Аніматор",
+    task:"Зроби кнопку червоною та анімованою",
+    hint:"Тобі знадобляться background та animation.",
+    required:["red","pulse"],
+    time:22,
+    points:200
+  },
+
+  {
+    title:"Рівень 4 — Дизайнер",
+    task:"Зроби кнопку великою, круглою та додай тінь",
+    hint:"transform + border-radius + box-shadow.",
+    required:["big","round","shadow"],
+    time:25,
+    points:250
+  },
+
+  {
+    title:"Рівень 5 — CSS-чаклун",
+    task:"Зроби градієнт, glow та анімацію",
+    hint:"Твій CSS має виглядати магічно ✨",
+    required:["gradient","glow","pulse"],
+    time:25,
+    points:300
+  },
+
+  {
+    title:"Рівень 6 — Майстер руху",
+    task:"Зроби елемент великим, поверни його та додай тінь",
+    hint:"Використай transform, rotate та box-shadow.",
+    required:["big","rotate","shadow"],
+    time:25,
+    points:350
+  },
+
+  {
+    title:"Рівень 7 — CSS-легенда",
+    task:"Створи градієнтну круглу кнопку з glow та анімацією",
+    hint:"Потрібно 4 властивості.",
+    required:["gradient","round","glow","pulse"],
+    time:30,
+    points:450
+  },
+
+  {
+    title:"Рівень 8 — CSS GOD",
+    task:"Фінальна магія: gradient + glow + round + rotate + pulse",
+    hint:"Застосуй усі необхідні ефекти!",
+    required:["gradient","glow","round","rotate","pulse"],
+    time:35,
+    points:600
+  }
+
+];
+
+
+let currentLevel = 0;
+let score = 0;
+let combo = 0;
+let lives = 3;
+let selected = [];
+let timeLeft = 20;
+let timer = null;
+let levelFinished = false;
+
+
+const demo = document.getElementById("demo");
+const target = document.getElementById("target");
+
+const levelEl = document.getElementById("level");
+const scoreEl = document.getElementById("score");
+const comboEl = document.getElementById("combo");
+const livesEl = document.getElementById("lives");
+
+const levelTitle = document.getElementById("levelTitle");
+const task = document.getElementById("task");
+const hint = document.getElementById("hint");
+const timerEl = document.getElementById("timer");
+const progress = document.getElementById("progress");
+
+const selectedEl = document.getElementById("selected");
+const result = document.getElementById("result");
+
+const modal = document.getElementById("modal");
+const modalTitle = document.getElementById("modalTitle");
+const modalText = document.getElementById("modalText");
+const finalScore = document.getElementById("finalScore");
+const modalIcon = document.getElementById("modalIcon");
+
+
+/* =========================
+   CSS ЕФЕКТИ
+========================= */
+
+function applyStyle(style){
+
+  if(style === "red"){
+    demo.style.background = "#dc2626";
+  }
+
+  if(style === "round"){
+    demo.style.borderRadius = "50px";
+    demo.style.padding = "18px 35px";
+  }
+
+  if(style === "shadow"){
+    demo.style.boxShadow = "0 15px 35px #0f172a55";
+  }
+
+  if(style === "big"){
+    demo.style.transform = "scale(1.3)";
+  }
+
+  if(style === "pulse"){
+    demo.classList.add("pulse-animation");
+  }
+
+  if(style === "rotate"){
+    demo.style.transform = "rotate(8deg) scale(1.08)";
+  }
+
+  if(style === "gradient"){
+    demo.style.background =
+      "linear-gradient(135deg,#7c3aed,#2563eb,#06b6d4)";
+  }
+
+  if(style === "glow"){
+    demo.style.boxShadow =
+      "0 0 15px #7c3aed,0 0 35px #7c3aed88";
+  }
+
+}
+
+
+/* =========================
+   КНОПКИ CSS
+========================= */
+
+document.querySelectorAll(".css-btn").forEach(button => {
+
+  button.addEventListener("click",()=>{
+
+    if(levelFinished) return;
+
+    const style = button.dataset.style;
+
+    if(selected.includes(style)){
+      return;
+    }
+
+    selected.push(style);
+
+    applyStyle(style);
+
+    button.classList.add("used");
+
+    updateSelected();
+
+    result.textContent =
+      "✨ Додано CSS-властивість: " + style;
+
+  });
+
+});
+
+
+/* =========================
+   ВІДОБРАЖЕННЯ ВИБРАНОГО
+========================= */
+
+function updateSelected(){
+
+  if(selected.length === 0){
+
+    selectedEl.innerHTML =
+      'Обрані властивості:<br>' +
+      '<span style="background:#f1f5f9;color:#64748b">' +
+      'поки що немає</span>';
+
+    return;
+  }
+
+  selectedEl.innerHTML =
+    "Обрані властивості:<br>" +
+    selected.map(x => `<span>${x}</span>`).join("");
+
+}
+
+
+/* =========================
+   ПЕРЕВІРКА
+========================= */
+
+document.getElementById("check").addEventListener("click",checkLevel);
+
+
+function checkLevel(){
+
+  if(levelFinished) return;
+
+  const data = levels[currentLevel];
+
+  const correct =
+    data.required.every(x => selected.includes(x));
+
+  const noExtra =
+    selected.every(x => data.required.includes(x));
+
+  if(correct && noExtra){
+
+    levelFinished = true;
+
+    clearInterval(timer);
+
+    combo++;
+
+    const bonus =
+      Math.max(0,timeLeft * 5) +
+      combo * 30;
+
+    const gained =
+      data.points + bonus;
+
+    score += gained;
+
+    scoreEl.textContent = score;
+    comboEl.textContent = "x" + combo;
+
+    result.innerHTML =
+      `🎉 Правильно! +${gained} очок`;
+
+    target.classList.add("correct");
+
+    setTimeout(()=>{
+      target.classList.remove("correct");
+
+      if(currentLevel < levels.length - 1){
+
+        loadLevel(currentLevel + 1);
+
+      }else{
+
+        finishGame();
+
+      }
+
+    },1300);
+
+  }else{
+
+    combo = 0;
+    comboEl.textContent = "x0";
+
+    lives--;
+
+    updateLives();
+
+    target.classList.add("wrong");
+
+    setTimeout(()=>{
+      target.classList.remove("wrong");
+    },400);
+
+    if(lives <= 0){
+
+      gameOver();
+
+      return;
+    }
+
+    result.innerHTML =
+      "❌ Не зовсім! Перевір властивості та спробуй ще.";
+
+  }
+
+}
+
+
+/* =========================
+   ТАЙМЕР
+========================= */
+
+function startTimer(){
+
+  clearInterval(timer);
+
+  timeLeft = levels[currentLevel].time;
+
+  updateTimer();
+
+  timer = setInterval(()=>{
+
+    timeLeft--;
+
+    updateTimer();
+
+    if(timeLeft <= 0){
+
+      clearInterval(timer);
+
+      lives--;
+
+      updateLives();
+
+      combo = 0;
+      comboEl.textContent = "x0";
+
+      result.innerHTML =
+        "⏰ Час вийшов! Спробуй ще раз.";
+
+      resetCurrentLevel();
+
+      if(lives <= 0){
+        gameOver();
+      }
+
+    }
+
+  },1000);
+
+}
+
+
+function updateTimer(){
+
+  timerEl.textContent = timeLeft + "с";
+
+  timerEl.classList.toggle(
+    "danger",
+    timeLeft <= 5
+  );
+
+}
+
+
+/* =========================
+   ЖИТТЯ
+========================= */
+
+function updateLives(){
+
+  livesEl.textContent =
+    "❤️".repeat(Math.max(0,lives)) +
+    "🖤".repeat(Math.max(0,3-lives));
+
+}
+
+
+/* =========================
+   ЗАВАНТАЖЕННЯ РІВНЯ
+========================= */
+
+function loadLevel(index){
+
+  currentLevel = index;
+
+  const data = levels[currentLevel];
+
+  levelFinished = false;
+
+  selected = [];
+
+  levelEl.textContent =
+    `${currentLevel + 1}/${levels.length}`;
+
+  levelTitle.textContent = data.title;
+  task.textContent = data.task;
+  hint.textContent = data.hint;
+
+  progress.style.width =
+    ((currentLevel) / levels.length * 100) + "%";
+
+  resetVisual();
+
+  document.querySelectorAll(".css-btn")
+    .forEach(button=>{
+      button.classList.remove("used");
+    });
+
+  result.textContent =
+    "🎯 Виконай завдання рівня!";
+
+  updateSelected();
+
+  startTimer();
+
+}
+
+
+/* =========================
+   СКИДАННЯ ЕФЕКТІВ
+========================= */
+
+function resetVisual(){
+
+  demo.style.background = "#2563eb";
+  demo.style.borderRadius = "9px";
+  demo.style.padding = "13px 24px";
+  demo.style.boxShadow = "none";
+  demo.style.transform = "none";
+
+  demo.className = "";
+
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+document.getElementById("reset")
+.addEventListener("click",()=>{
+
+  if(levelFinished) return;
+
+  resetCurrentLevel();
+
+});
+
+
+function resetCurrentLevel(){
+
+  selected = [];
+
+  resetVisual();
+
+  document.querySelectorAll(".css-btn")
+    .forEach(button=>{
+      button.classList.remove("used");
+    });
+
+  updateSelected();
+
+  result.textContent =
+    "↩ Рівень скинуто. Спробуй ще раз.";
+
+  startTimer();
+
+}
+
+
+/* =========================
+   GAME OVER
+========================= */
+
+function gameOver(){
+
+  clearInterval(timer);
+
+  modalIcon.textContent = "💥";
+  modalTitle.textContent = "Гру завершено";
+  modalText.textContent =
+    "Життя закінчилися. CSS-магія потребує ще трохи практики!";
+
+  finalScore.textContent =
+    score + " очок";
+
+  modal.classList.add("show");
+
+}
+
+
+/* =========================
+   ФІНАЛ
+========================= */
+
+function finishGame(){
+
+  clearInterval(timer);
+  window.ITLabProgress.complete("css", score);
+
+  progress.style.width = "100%";
+
+  modalIcon.textContent = "🏆";
+  modalTitle.textContent = "CSS-МАЙСТЕР!";
+  modalText.textContent =
+    "Ти успішно пройшов усі рівні CSS-магії!";
+
+  finalScore.textContent =
+    score + " очок";
+
+  modal.classList.add("show");
+
+}
+
+
+/* =========================
+   RESTART
+========================= */
+
+document.getElementById("restart")
+.addEventListener("click",()=>{
+
+  modal.classList.remove("show");
+
+  currentLevel = 0;
+  score = 0;
+  combo = 0;
+  lives = 3;
+
+  scoreEl.textContent = "0";
+  comboEl.textContent = "x0";
+
+  updateLives();
+
+  loadLevel(0);
+
+});
+
+
+/* =========================
+   CSS АНІМАЦІЯ
+========================= */
+
+const animationStyle = document.createElement("style");
+
+animationStyle.textContent = `
+
+.pulse-animation{
+  animation: cssPulse .8s infinite alternate;
+}
+
+@keyframes cssPulse{
+  from{
+    transform:scale(1);
+  }
+
+  to{
+    transform:scale(1.12);
+  }
+}
+
+`;
+
+document.head.appendChild(animationStyle);
+
+
+/* =========================
+   START
+========================= */
+
+updateLives();
+loadLevel(0);
+
+</script>
+
+</body>
+</html>

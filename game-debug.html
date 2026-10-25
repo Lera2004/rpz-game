@@ -1,0 +1,2296 @@
+﻿<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Зламай код | IT LAB</title>
+
+<style>
+
+:root{
+    --primary:#4f46e5;
+    --purple:#7c3aed;
+    --green:#22c55e;
+    --red:#ef4444;
+    --yellow:#f59e0b;
+
+    --dark:#0f172a;
+    --dark2:#020617;
+
+    --text:#0f172a;
+    --muted:#64748b;
+
+    --bg:#f5f7fb;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+
+    color:var(--text);
+
+    font-family:
+        Inter,
+        Manrope,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 10% 0%,
+            #e0e7ff,
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 100%,
+            #ede9fe,
+            transparent 30%
+        ),
+        var(--bg);
+
+    min-height:100vh;
+}
+
+main{
+    width:min(950px,calc(100% - 28px));
+
+    margin:auto;
+
+    padding:18px 0 50px;
+}
+
+/* ==============================
+   NAVIGATION
+============================== */
+
+.nav{
+    padding:13px 16px;
+
+    margin-bottom:18px;
+
+    background:#fff;
+
+    border:1px solid #dbe5f2;
+
+    border-radius:15px;
+
+    box-shadow:
+        0 10px 25px #0f172a0b;
+}
+
+.nav a{
+    color:var(--primary);
+
+    font-weight:900;
+
+    text-decoration:none;
+}
+
+/* ==============================
+   HERO
+============================== */
+
+.hero{
+    color:white;
+
+    background:
+        radial-gradient(
+            circle at 90% 20%,
+            #6366f155,
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #020617,
+            #312e81
+        );
+
+    border-radius:24px;
+
+    padding:32px;
+
+    margin-bottom:18px;
+
+    box-shadow:
+        0 20px 50px #312e8140;
+}
+
+.hero h1{
+    margin:0 0 10px;
+
+    font-size:
+        clamp(30px,6vw,48px);
+}
+
+.hero p{
+    margin:0;
+
+    color:#dbeafe;
+
+    font-size:17px;
+
+    line-height:1.6;
+}
+
+/* ==============================
+   CARD
+============================== */
+
+.card{
+    background:#fff;
+
+    border:1px solid #dbe5f2;
+
+    border-radius:22px;
+
+    padding:24px;
+
+    box-shadow:
+        0 15px 40px #0f172a0c;
+}
+
+/* ==============================
+   STATS
+============================== */
+
+.stats{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:10px;
+
+    margin-bottom:20px;
+}
+
+.stat{
+    padding:13px;
+
+    text-align:center;
+
+    border-radius:13px;
+
+    background:#f8fafc;
+
+    border:1px solid #e2e8f0;
+}
+
+.stat small{
+    display:block;
+
+    color:var(--muted);
+
+    margin-bottom:4px;
+}
+
+.stat strong{
+    font-size:21px;
+}
+
+/* ==============================
+   LEVEL
+============================== */
+
+.level-box{
+    padding:18px;
+
+    margin-bottom:20px;
+
+    border-radius:16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eef2ff,
+            #f5f3ff
+        );
+
+    border:1px solid #c7d2fe;
+}
+
+.level-top{
+    display:flex;
+
+    justify-content:
+        space-between;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+.level-title{
+    font-size:21px;
+
+    font-weight:900;
+
+    color:#312e81;
+}
+
+.level-type{
+    padding:6px 10px;
+
+    border-radius:8px;
+
+    background:#4f46e5;
+
+    color:#fff;
+
+    font-size:12px;
+
+    font-weight:900;
+}
+
+.level-description{
+    margin:10px 0 0;
+
+    color:#475569;
+
+    line-height:1.5;
+}
+
+/* ==============================
+   PROGRESS
+============================== */
+
+.progress{
+    height:8px;
+
+    margin-top:15px;
+
+    background:#e2e8f0;
+
+    border-radius:20px;
+
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+
+    width:0%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #4f46e5,
+            #7c3aed,
+            #a855f7
+        );
+
+    transition:
+        width .3s;
+}
+
+/* ==============================
+   TIMER
+============================== */
+
+.timer-box{
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:18px;
+
+    padding:12px 15px;
+
+    border-radius:13px;
+
+    background:#f8fafc;
+
+    border:1px solid #e2e8f0;
+}
+
+.timer-icon{
+    font-size:23px;
+}
+
+.timer{
+    font-size:20px;
+
+    font-weight:900;
+
+    color:#334155;
+}
+
+.timer.danger{
+    color:var(--red);
+
+    animation:
+        pulse .7s infinite;
+}
+
+@keyframes pulse{
+
+    50%{
+        opacity:.4;
+    }
+
+}
+
+/* ==============================
+   QUESTION
+============================== */
+
+.question{
+    margin-bottom:15px;
+
+    font-size:21px;
+
+    font-weight:900;
+}
+
+/* ==============================
+   CODE
+============================== */
+
+.code-wrapper{
+    position:relative;
+}
+
+.code{
+    padding:22px;
+
+    border-radius:16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #020617,
+            #111827
+        );
+
+    color:#d1fae5;
+
+    font-family:
+        "Cascadia Code",
+        "Fira Code",
+        Consolas,
+        monospace;
+
+    line-height:1.8;
+
+    font-size:15px;
+
+    white-space:pre-wrap;
+
+    overflow:auto;
+
+    border:1px solid #334155;
+
+    box-shadow:
+        inset 0 0 30px #0008;
+}
+
+.code .keyword{
+    color:#c084fc;
+}
+
+.code .number{
+    color:#fbbf24;
+}
+
+.code .string{
+    color:#86efac;
+}
+
+.code .error{
+    color:#fb7185;
+
+    text-decoration:
+        underline wavy #ef4444;
+}
+
+/* ==============================
+   OPTIONS
+============================== */
+
+.options{
+    display:grid;
+
+    gap:10px;
+
+    margin-top:18px;
+}
+
+.option{
+    position:relative;
+
+    padding:15px 17px;
+
+    border:2px solid #e2e8f0;
+
+    border-radius:13px;
+
+    background:#fff;
+
+    color:#1e293b;
+
+    font:inherit;
+
+    font-weight:800;
+
+    text-align:left;
+
+    cursor:pointer;
+
+    transition:
+        transform .15s,
+        border .15s,
+        background .15s,
+        box-shadow .15s;
+}
+
+.option:hover{
+    transform:
+        translateY(-2px);
+
+    border-color:#818cf8;
+
+    background:#eef2ff;
+
+    box-shadow:
+        0 8px 20px #4f46e51a;
+}
+
+.option.correct{
+    border-color:
+        var(--green);
+
+    background:
+        #dcfce7;
+
+    color:
+        #166534;
+}
+
+.option.wrong{
+    border-color:
+        var(--red);
+
+    background:
+        #fee2e2;
+
+    color:
+        #991b1b;
+}
+
+.option:disabled{
+    cursor:default;
+}
+
+/* ==============================
+   RESULT
+============================== */
+
+.result{
+    min-height:55px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    margin-top:18px;
+
+    padding:13px;
+
+    border-radius:13px;
+
+    background:#f8fafc;
+
+    font-weight:900;
+
+    line-height:1.5;
+}
+
+.result.success{
+    background:#dcfce7;
+
+    color:#166534;
+}
+
+.result.error{
+    background:#fee2e2;
+
+    color:#991b1b;
+}
+
+/* ==============================
+   HINT
+============================== */
+
+.hint{
+    display:none;
+
+    margin-top:14px;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    background:#fffbeb;
+
+    border:1px solid #fde68a;
+
+    color:#92400e;
+
+    font-weight:700;
+
+    line-height:1.5;
+}
+
+.hint.show{
+    display:block;
+}
+
+/* ==============================
+   BUTTONS
+============================== */
+
+.actions{
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    margin-top:20px;
+}
+
+.btn{
+    padding:12px 17px;
+
+    border:0;
+
+    border-radius:11px;
+
+    font:inherit;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+    transition:
+        transform .15s,
+        filter .15s;
+}
+
+.btn:hover{
+    transform:
+        translateY(-2px);
+
+    filter:
+        brightness(1.08);
+}
+
+.btn-primary{
+    background:
+        linear-gradient(
+            135deg,
+            #4f46e5,
+            #7c3aed
+        );
+
+    color:#fff;
+}
+
+.btn-hint{
+    background:#fef3c7;
+
+    color:#92400e;
+
+    border:1px solid #fde68a;
+}
+
+.btn-restart{
+    background:#e2e8f0;
+
+    color:#334155;
+}
+
+.btn-next{
+    background:
+        linear-gradient(
+            135deg,
+            #059669,
+            #16a34a
+        );
+
+    color:white;
+
+    display:none;
+}
+
+/* ==============================
+   EXPLANATION
+============================== */
+
+.explanation{
+    display:none;
+
+    margin-top:18px;
+
+    padding:17px;
+
+    border-radius:15px;
+
+    background:#f8fafc;
+
+    border:1px solid #e2e8f0;
+}
+
+.explanation.show{
+    display:block;
+}
+
+.explanation h3{
+    margin:0 0 8px;
+
+    font-size:17px;
+}
+
+.explanation p{
+    margin:0;
+
+    color:#475569;
+
+    line-height:1.6;
+}
+
+/* ==============================
+   COMBO
+============================== */
+
+.combo{
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:5px;
+
+    margin-left:8px;
+
+    padding:4px 8px;
+
+    border-radius:7px;
+
+    background:#fef3c7;
+
+    color:#92400e;
+
+    font-size:12px;
+}
+
+/* ==============================
+   MODAL
+============================== */
+
+.overlay{
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    place-items:center;
+
+    padding:20px;
+
+    background:#020617aa;
+
+    backdrop-filter:
+        blur(7px);
+
+    z-index:100;
+}
+
+.overlay.show{
+    display:grid;
+}
+
+.modal{
+    width:min(500px,100%);
+
+    padding:32px;
+
+    text-align:center;
+
+    background:#fff;
+
+    border-radius:24px;
+
+    box-shadow:
+        0 30px 100px #0008;
+
+    animation:
+        modalIn .25s ease;
+}
+
+@keyframes modalIn{
+
+    from{
+        opacity:0;
+        transform:
+            scale(.9)
+            translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:
+            scale(1)
+            translateY(0);
+    }
+
+}
+
+.modal-icon{
+    font-size:70px;
+}
+
+.modal h2{
+    margin:10px 0;
+
+    font-size:29px;
+}
+
+.modal p{
+    color:#64748b;
+
+    line-height:1.6;
+}
+
+/* ==============================
+   BACK
+============================== */
+
+.back{
+    display:block;
+
+    width:max-content;
+
+    margin:20px auto 0;
+
+    padding:12px 16px;
+
+    border-radius:11px;
+
+    background:#eef2ff;
+
+    color:#3730a3;
+
+    text-decoration:none;
+
+    font-weight:900;
+}
+
+/* ==============================
+   MOBILE
+============================== */
+
+@media(max-width:650px){
+
+    .stats{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .card{
+        padding:16px;
+    }
+
+    .hero{
+        padding:23px;
+    }
+
+    .code{
+        font-size:13px;
+
+        padding:16px;
+    }
+
+    .level-top{
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+    }
+
+}
+
+</style>
+<link rel="stylesheet" href="mobile.css">
+</head>
+
+<body>
+
+<main>
+
+<nav class="nav">
+    <a href="games.html">← Усі ігри</a>
+</nav>
+
+
+<header class="hero">
+
+    <h1>🐛 Зламай код</h1>
+
+    <p>
+        Стань debugger'ом IT LAB.
+        Аналізуй код, знаходь помилки,
+        вибирай правильну відповідь
+        і набирай найбільше очок.
+    </p>
+
+</header>
+
+
+<section class="card">
+
+    <!-- СТАТИСТИКА -->
+
+    <div class="stats">
+
+        <div class="stat">
+            <small>Рівень</small>
+            <strong id="level">1 / 12</strong>
+        </div>
+
+        <div class="stat">
+            <small>Очки</small>
+            <strong id="score">0</strong>
+        </div>
+
+        <div class="stat">
+            <small>Життя</small>
+            <strong id="lives">❤️❤️❤️</strong>
+        </div>
+
+        <div class="stat">
+            <small>Серія</small>
+            <strong id="combo">0 🔥</strong>
+        </div>
+
+    </div>
+
+
+    <!-- РІВЕНЬ -->
+
+    <div class="level-box">
+
+        <div class="level-top">
+
+            <div class="level-title" id="level-title">
+                Рівень 1
+            </div>
+
+            <div class="level-type" id="level-type">
+                ЛОГІКА
+            </div>
+
+        </div>
+
+        <p
+            class="level-description"
+            id="level-description"
+        >
+            Знайди правильний результат виконання програми.
+        </p>
+
+        <div class="progress">
+
+            <div
+                class="progress-bar"
+                id="progress"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ТАЙМЕР -->
+
+    <div class="timer-box">
+
+        <div class="timer-icon">
+            ⏱️
+        </div>
+
+        <div>
+
+            <div
+                style="
+                    font-size:12px;
+                    color:#64748b;
+                "
+            >
+                Час на завдання
+            </div>
+
+            <div
+                class="timer"
+                id="timer"
+            >
+                    60 с
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ПИТАННЯ -->
+
+    <div
+        class="question"
+        id="question"
+    >
+        Який результат програми?
+    </div>
+
+
+    <!-- КОД -->
+
+    <div class="code-wrapper">
+
+        <div
+            class="code"
+            id="code"
+        ></div>
+
+    </div>
+
+
+    <!-- ВАРІАНТИ -->
+
+    <div
+        class="options"
+        id="options"
+    ></div>
+
+
+    <!-- РЕЗУЛЬТАТ -->
+
+    <div
+        class="result"
+        id="result"
+    >
+        Обери відповідь.
+    </div>
+
+
+    <!-- ПІДКАЗКА -->
+
+    <div
+        class="hint"
+        id="hint"
+    ></div>
+
+
+    <!-- ПОЯСНЕННЯ -->
+
+    <div
+        class="explanation"
+        id="explanation"
+    >
+
+        <h3>
+            🧠 Пояснення
+        </h3>
+
+        <p id="explanation-text"></p>
+
+    </div>
+
+
+    <!-- КНОПКИ -->
+
+    <div class="actions">
+
+        <button
+            class="btn btn-hint"
+            id="hint-button"
+        >
+            💡 Підказка
+        </button>
+
+        <button
+            class="btn btn-restart"
+            id="restart"
+        >
+            🔄 Почати спочатку
+        </button>
+
+        <button
+            class="btn btn-next"
+            id="next"
+        >
+            Наступний рівень →
+        </button>
+
+    </div>
+
+
+    <a
+        class="back"
+        href="games.html"
+    >
+        ← Повернутися до ігор
+    </a>
+
+</section>
+
+</main>
+
+
+<!-- МОДАЛЬНЕ ВІКНО -->
+
+<div
+    class="overlay"
+    id="overlay"
+>
+
+    <div class="modal">
+
+        <div
+            class="modal-icon"
+            id="modal-icon"
+        >
+            🎉
+        </div>
+
+        <h2 id="modal-title">
+            Вітаємо!
+        </h2>
+
+        <p id="modal-text">
+            Результат
+        </p>
+
+        <div class="actions">
+
+            <button
+                class="btn btn-primary"
+                id="modal-button"
+            >
+                Продовжити →
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="game-progress.js"></script>
+<script>
+
+/* =========================================================
+   ЗЛАМAЙ КОД
+   Повна гра
+========================================================= */
+
+
+/* =========================================================
+   РІВНІ
+========================================================= */
+
+const levels = [
+
+{
+    type:"ЛОГІКА",
+
+    title:"Порахуй цикл",
+
+    description:
+        "Знайди результат виконання циклу.",
+
+    question:
+        "Яке число буде виведено?",
+
+    code:
+`score = 0
+for i = 1 to 4
+    score = score + 2
+print(score)`,
+
+    options:[
+        "6",
+        "8",
+        "10",
+        "12"
+    ],
+
+    correct:1,
+
+    explanation:
+        "Цикл виконується 4 рази. На кожній ітерації до score додається 2: 2 + 2 + 2 + 2 = 8.",
+
+    hint:
+        "Подивись, скільки разів виконується цикл."
+},
+
+{
+    type:"ЛОГІКА",
+
+    title:"Умова",
+
+    description:
+        "Визнач, яке повідомлення буде виведено.",
+
+    question:
+        "Що надрукує програма?",
+
+    code:
+`age = 18
+
+if age >= 18
+    print("Дорослий")
+else
+    print("Дитина")`,
+
+    options:[
+        "Дитина",
+        "Помилка",
+        "Дорослий",
+        "Нічого"
+    ],
+
+    correct:2,
+
+    explanation:
+        "18 >= 18 — це true, тому виконується перша гілка і програма виводить «Дорослий».",
+
+    hint:
+        "Порівняй 18 та умову >= 18."
+},
+
+{
+    type:"DEBUG",
+
+    title:"Знайди баг",
+
+    description:
+        "У коді є логічна помилка.",
+
+    question:
+        "Що неправильно?",
+
+    code:
+`password = "1234"
+
+if password = "1234"
+    print("Доступ дозволено")
+else
+    print("Помилка")`,
+
+    options:[
+        "Потрібно == замість =",
+        "Потрібно прибрати if",
+        "Потрібно змінити password",
+        "Помилки немає"
+    ],
+
+    correct:0,
+
+    explanation:
+        "В умові порівняння використовується ==. Один знак = зазвичай використовується для присвоєння.",
+
+    hint:
+        "Зверни увагу на знак між password та \"1234\"."
+},
+
+{
+    type:"ЦИКЛ",
+
+    title:"Скільки разів?",
+
+    description:
+        "Порахуй кількість повторень.",
+
+    question:
+        "Скільки разів виконається print?",
+
+    code:
+`for i = 1 to 5
+    print("IT LAB")`,
+
+    options:[
+        "4",
+        "5",
+        "6",
+        "10"
+    ],
+
+    correct:1,
+
+    explanation:
+        "Цикл від 1 до 5 включно має п'ять ітерацій.",
+
+    hint:
+        "Порахуй числа: 1, 2, 3, 4, 5."
+},
+
+{
+    type:"ЗМІННІ",
+
+    title:"Обмін значеннями",
+
+    description:
+        "Програміст хоче поміняти місцями два числа.",
+
+    question:
+        "Що буде після виконання коду?",
+
+    code:
+`a = 5
+b = 10
+
+temp = a
+a = b
+b = temp`,
+
+    options:[
+        "a = 5, b = 10",
+        "a = 10, b = 5",
+        "a = 15, b = 0",
+        "Помилка"
+    ],
+
+    correct:1,
+
+    explanation:
+        "temp зберігає старе значення a. Потім a отримує значення b, а b отримує старе значення a.",
+
+    hint:
+        "Зверни увагу, для чого використовується temp."
+},
+
+{
+    type:"МАСИВ",
+
+    title:"Індекси",
+
+    description:
+        "Перевір знання індексації масиву.",
+
+    question:
+        "Що буде виведено?",
+
+    code:
+`numbers = [10, 20, 30, 40]
+
+print(numbers[2])`,
+
+    options:[
+        "10",
+        "20",
+        "30",
+        "40"
+    ],
+
+    correct:2,
+
+    explanation:
+        "У більшості мов програмування індексація починається з 0. Тому numbers[2] — це третій елемент, тобто 30.",
+
+    hint:
+        "Пам'ятай: перший індекс — 0."
+},
+
+{
+    type:"ЛОГІКА",
+
+    title:"AND",
+
+    description:
+        "Перевір логічну операцію AND.",
+
+    question:
+        "Що надрукує програма?",
+
+    code:
+`age = 20
+hasTicket = true
+
+if age >= 18 AND hasTicket
+    print("Вхід дозволено")
+else
+    print("Вхід заборонено")`,
+
+    options:[
+        "Вхід дозволено",
+        "Вхід заборонено",
+        "Помилка",
+        "Нічого"
+    ],
+
+    correct:0,
+
+    explanation:
+        "Обидві умови істинні: вік 20 років та наявність квитка. Тому AND повертає true.",
+
+    hint:
+        "AND вимагає, щоб обидві умови були true."
+},
+
+{
+    type:"ЦИКЛ",
+
+    title:"Сума",
+
+    description:
+        "Визнач кінцеве значення змінної.",
+
+    question:
+        "Яке значення матиме sum?",
+
+    code:
+`sum = 0
+
+for i = 1 to 3
+    sum = sum + i
+
+print(sum)`,
+
+    options:[
+        "3",
+        "5",
+        "6",
+        "9"
+    ],
+
+    correct:2,
+
+    explanation:
+        "sum = 0 + 1 + 2 + 3 = 6.",
+
+    hint:
+        "Додай числа 1 + 2 + 3."
+},
+
+{
+    type:"DEBUG",
+
+    title:"Нескінченний цикл",
+
+    description:
+        "Знайди проблему в коді.",
+
+    question:
+        "Чому цикл не завершиться?",
+
+    code:
+`i = 1
+
+while i <= 5
+    print(i)`,
+
+    options:[
+        "i ніколи не збільшується",
+        "while не працює",
+        "print неправильний",
+        "Усе правильно"
+    ],
+
+    correct:0,
+
+    explanation:
+        "Значення i залишається рівним 1. Умова i <= 5 завжди буде істинною, тому цикл стане нескінченним.",
+
+    hint:
+        "Що відбувається зі змінною i всередині циклу?"
+},
+
+{
+    type:"РЯДОК",
+
+    title:"Довжина",
+
+    description:
+        "Перевір роботу з рядками.",
+
+    question:
+        "Що поверне len(\"IT LAB\")?",
+
+    code:
+`text = "IT LAB"
+
+print(len(text))`,
+
+    options:[
+        "5",
+        "6",
+        "7",
+        "4"
+    ],
+
+    correct:1,
+
+    explanation:
+        "Рядок «IT LAB» містить 6 символів: I, T, пробіл, L, A, B.",
+
+    hint:
+        "Не забудь порахувати пробіл."
+},
+
+{
+    type:"ФУНКЦІЯ",
+
+    title:"Повернення",
+
+    description:
+        "Розберися з return.",
+
+    question:
+        "Що буде виведено?",
+
+    code:
+`function double(x)
+    return x * 2
+
+print(double(6))`,
+
+    options:[
+        "6",
+        "8",
+        "12",
+        "36"
+    ],
+
+    correct:2,
+
+    explanation:
+        "Функція double множить отримане число на 2. double(6) = 12.",
+
+    hint:
+        "Функція множить x на 2."
+},
+
+{
+    type:"ФІНАЛ",
+
+    title:"Фінальний баг",
+
+    description:
+        "Останнє завдання. Знайди логічну помилку.",
+
+    question:
+        "Яке значення отримає result?",
+
+    code:
+`x = 10
+
+if x > 5
+    result = "A"
+else if x > 8
+    result = "B"
+else
+    result = "C"
+
+print(result)`,
+
+    options:[
+        "A",
+        "B",
+        "C",
+        "Помилка"
+    ],
+
+    correct:0,
+
+    explanation:
+        "Перша умова x > 5 вже істинна, тому виконується result = \"A\". До else if програма вже не доходить.",
+
+    hint:
+        "Перевір першу умову. Вона виконується?"
+}
+
+];
+
+
+/* =========================================================
+   ЗМІННІ ГРИ
+========================================================= */
+
+let currentLevel = 0;
+
+let score = 0;
+
+let lives = 3;
+
+let combo = 0;
+
+const TIME_LIMIT = 60;
+
+let timeLeft = TIME_LIMIT;
+
+let timer = null;
+
+let answered = false;
+
+let hintUsed = false;
+
+
+/* =========================================================
+   DOM
+========================================================= */
+
+const levelElement =
+    document.getElementById("level");
+
+const scoreElement =
+    document.getElementById("score");
+
+const livesElement =
+    document.getElementById("lives");
+
+const comboElement =
+    document.getElementById("combo");
+
+const levelTitle =
+    document.getElementById("level-title");
+
+const levelType =
+    document.getElementById("level-type");
+
+const levelDescription =
+    document.getElementById("level-description");
+
+const progress =
+    document.getElementById("progress");
+
+const timerElement =
+    document.getElementById("timer");
+
+const question =
+    document.getElementById("question");
+
+const code =
+    document.getElementById("code");
+
+const options =
+    document.getElementById("options");
+
+const result =
+    document.getElementById("result");
+
+const hint =
+    document.getElementById("hint");
+
+const explanation =
+    document.getElementById("explanation");
+
+const explanationText =
+    document.getElementById("explanation-text");
+
+const hintButton =
+    document.getElementById("hint-button");
+
+const restartButton =
+    document.getElementById("restart");
+
+const nextButton =
+    document.getElementById("next");
+
+const overlay =
+    document.getElementById("overlay");
+
+const modalIcon =
+    document.getElementById("modal-icon");
+
+const modalTitle =
+    document.getElementById("modal-title");
+
+const modalText =
+    document.getElementById("modal-text");
+
+const modalButton =
+    document.getElementById("modal-button");
+
+
+/* =========================================================
+   ПОКАЗ РІВНЯ
+========================================================= */
+
+function loadLevel(){
+
+    clearInterval(timer);
+
+    answered = false;
+
+    hintUsed = false;
+
+    timeLeft = TIME_LIMIT;
+
+    const data =
+        levels[currentLevel];
+
+
+    levelElement.textContent =
+        `${currentLevel + 1} / ${levels.length}`;
+
+    levelTitle.textContent =
+        `Рівень ${currentLevel + 1}: ${data.title}`;
+
+    levelType.textContent =
+        data.type;
+
+    levelDescription.textContent =
+        data.description;
+
+    question.textContent =
+        data.question;
+
+    code.textContent =
+        data.code;
+
+
+    progress.style.width =
+        `${((currentLevel + 1) / levels.length) * 100}%`;
+
+
+    timerElement.textContent =
+        `${TIME_LIMIT} с`;
+
+    timerElement.classList.remove(
+        "danger"
+    );
+
+
+    result.textContent =
+        "🧑‍💻 Обери правильну відповідь.";
+
+    result.className =
+        "result";
+
+
+    hint.textContent =
+        "";
+
+    hint.classList.remove(
+        "show"
+    );
+
+
+    explanation.classList.remove(
+        "show"
+    );
+
+
+    nextButton.style.display =
+        "none";
+
+
+    createOptions(
+        data
+    );
+
+
+    updateStats();
+
+    startTimer();
+
+}
+
+
+/* =========================================================
+   ВАРІАНТИ
+========================================================= */
+
+function createOptions(data){
+
+    options.innerHTML = "";
+
+    data.options.forEach(
+        (answer,index) => {
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+            button.className =
+                "option";
+
+            button.textContent =
+                `${String.fromCharCode(65 + index)}. ${answer}`;
+
+            button.addEventListener(
+                "click",
+                () =>
+                    checkAnswer(
+                        index,
+                        button
+                    )
+            );
+
+            options.appendChild(
+                button
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   ПЕРЕВІРКА
+========================================================= */
+
+function checkAnswer(
+    selected,
+    selectedButton
+){
+
+    if(answered)
+        return;
+
+    answered = true;
+
+    clearInterval(timer);
+
+    const data =
+        levels[currentLevel];
+
+    const allButtons =
+        document.querySelectorAll(
+            ".option"
+        );
+
+
+    allButtons.forEach(
+        (button,index) => {
+
+            button.disabled =
+                true;
+
+            if(
+                index === data.correct
+            ){
+
+                button.classList.add(
+                    "correct"
+                );
+
+            }
+
+        }
+    );
+
+
+    if(
+        selected ===
+        data.correct
+    ){
+
+        selectedButton.classList.add(
+            "correct"
+        );
+
+        combo++;
+
+        const basePoints =
+            100;
+
+        const comboBonus =
+            Math.min(
+                combo * 25,
+                200
+            );
+
+        const timeBonus =
+            timeLeft * 3;
+
+        const hintPenalty =
+            hintUsed
+                ? 30
+                : 0;
+
+        const gained =
+            Math.max(
+                20,
+                basePoints +
+                comboBonus +
+                timeBonus -
+                hintPenalty
+            );
+
+        score += gained;
+
+
+        result.textContent =
+            `✅ Правильно! +${gained} очок`;
+
+        result.className =
+            "result success";
+
+
+        explanationText.textContent =
+            data.explanation;
+
+        explanation.classList.add(
+            "show"
+        );
+
+
+        if(combo >= 2){
+
+            result.innerHTML +=
+                `<span class="combo">
+                    🔥 Серія ×${combo}
+                </span>`;
+
+        }
+
+
+        nextButton.style.display =
+            "inline-block";
+
+
+        if(
+            currentLevel ===
+            levels.length - 1
+        ){
+
+            setTimeout(
+                finishGame,
+                700
+            );
+
+        }
+
+    }else{
+
+        selectedButton.classList.add(
+            "wrong"
+        );
+
+        lives--;
+
+        combo = 0;
+
+
+        result.textContent =
+            `❌ Неправильно! Правильна відповідь: ${data.options[data.correct]}`;
+
+        result.className =
+            "result error";
+
+
+        explanationText.textContent =
+            data.explanation;
+
+        explanation.classList.add(
+            "show"
+        );
+
+
+        if(lives <= 0){
+
+            setTimeout(
+                gameOver,
+                500
+            );
+
+        }else{
+
+            nextButton.style.display =
+                "inline-block";
+
+        }
+
+    }
+
+
+    updateStats();
+
+}
+
+
+/* =========================================================
+   ТАЙМЕР
+========================================================= */
+
+function startTimer(){
+
+    clearInterval(timer);
+
+    timer =
+        setInterval(
+            () => {
+
+                timeLeft--;
+
+                timerElement.textContent =
+                    `${timeLeft} с`;
+
+
+                if(
+                    timeLeft <= 10
+                ){
+
+                    timerElement.classList.add(
+                        "danger"
+                    );
+
+                }
+
+
+                if(
+                    timeLeft <= 0
+                ){
+
+                    clearInterval(timer);
+
+                    timeOut();
+
+                }
+
+            },
+            1000
+        );
+
+}
+
+
+/* =========================================================
+   ЧАС ВИЙШОВ
+========================================================= */
+
+function timeOut(){
+
+    if(answered)
+        return;
+
+    answered = true;
+
+    const data =
+        levels[currentLevel];
+
+    lives--;
+
+    combo = 0;
+
+
+    document
+        .querySelectorAll(
+            ".option"
+        )
+        .forEach(
+            (button,index) => {
+
+                button.disabled =
+                    true;
+
+                if(
+                    index === data.correct
+                ){
+
+                    button.classList.add(
+                        "correct"
+                    );
+
+                }
+
+            }
+        );
+
+
+    result.textContent =
+        `⏰ Час вийшов! Правильна відповідь: ${data.options[data.correct]}`;
+
+    result.className =
+        "result error";
+
+
+    explanationText.textContent =
+        data.explanation;
+
+    explanation.classList.add(
+        "show"
+    );
+
+
+    updateStats();
+
+
+    if(lives <= 0){
+
+        setTimeout(
+            gameOver,
+            600
+        );
+
+    }else{
+
+        nextButton.style.display =
+            "inline-block";
+
+    }
+
+}
+
+
+/* =========================================================
+   ПІДКАЗКА
+========================================================= */
+
+hintButton.addEventListener(
+    "click",
+    () => {
+
+        if(answered)
+            return;
+
+        const data =
+            levels[currentLevel];
+
+        hintUsed = true;
+
+        hint.textContent =
+            `💡 Підказка: ${data.hint}`;
+
+        hint.classList.add(
+            "show"
+        );
+
+    }
+);
+
+
+/* =========================================================
+   НАСТУПНИЙ РІВЕНЬ
+========================================================= */
+
+nextButton.addEventListener(
+    "click",
+    () => {
+
+        if(
+            currentLevel <
+            levels.length - 1
+        ){
+
+            currentLevel++;
+
+            loadLevel();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   ПЕРЕЗАПУСК
+========================================================= */
+
+restartButton.addEventListener(
+    "click",
+    () => {
+
+        currentLevel = 0;
+
+        score = 0;
+
+        lives = 3;
+
+        combo = 0;
+
+        loadLevel();
+
+    }
+);
+
+
+/* =========================================================
+   GAME OVER
+========================================================= */
+
+function gameOver(){
+
+    clearInterval(timer);
+
+    modalIcon.textContent =
+        "💻";
+
+    modalTitle.textContent =
+        "Система зламана!";
+
+    modalText.textContent =
+        `Ти дійшов до рівня ${currentLevel + 1} та набрав ${score} очок. Спробуй ще раз і побий свій результат!`;
+
+    modalButton.textContent =
+        "🔄 Почати заново";
+
+    modalButton.onclick =
+        () => {
+
+            overlay.classList.remove(
+                "show"
+            );
+
+            currentLevel = 0;
+
+            score = 0;
+
+            lives = 3;
+
+            combo = 0;
+
+            loadLevel();
+
+        };
+
+
+    overlay.classList.add(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   ФІНАЛ
+========================================================= */
+
+function finishGame(){
+
+    clearInterval(timer);
+    window.ITLabProgress.complete("debug", score);
+
+    modalIcon.textContent =
+        "🏆";
+
+    modalTitle.textContent =
+        "Ти зламав код!";
+
+    modalText.textContent =
+        `Вітаємо! Ти пройшов усі ${levels.length} рівнів та набрав ${score} очок. Тепер ти справжній debugger IT LAB.`;
+
+    modalButton.textContent =
+        "🔄 Зіграти ще раз";
+
+    modalButton.onclick =
+        () => {
+
+            overlay.classList.remove(
+                "show"
+            );
+
+            currentLevel = 0;
+
+            score = 0;
+
+            lives = 3;
+
+            combo = 0;
+
+            loadLevel();
+
+        };
+
+
+    overlay.classList.add(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   СТАТИСТИКА
+========================================================= */
+
+function updateStats(){
+
+    scoreElement.textContent =
+        score;
+
+    livesElement.textContent =
+        "❤️".repeat(
+            Math.max(
+                0,
+                lives
+            )
+        );
+
+    comboElement.textContent =
+        `${combo} 🔥`;
+
+}
+
+
+/* =========================================================
+   КЛАВІАТУРА
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if(answered)
+            return;
+
+        const buttons =
+            document.querySelectorAll(
+                ".option"
+            );
+
+        const key =
+            event.key.toLowerCase();
+
+        const index =
+            {
+                "1":0,
+                "2":1,
+                "3":2,
+                "4":3
+            }[key];
+
+
+        if(
+            index !== undefined &&
+            buttons[index]
+        ){
+
+            buttons[index].click();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   START
+========================================================= */
+
+loadLevel();
+
+</script>
+
+</body>
+</html>

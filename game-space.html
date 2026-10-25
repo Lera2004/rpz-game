@@ -1,0 +1,1870 @@
+﻿<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Космічний програміст | IT LAB</title>
+
+<style>
+:root{
+    --primary:#6366f1;
+    --primary2:#8b5cf6;
+    --dark:#050816;
+    --card:#ffffff12;
+    --border:#ffffff25;
+    --text:#f8fafc;
+    --muted:#cbd5e1;
+    --green:#22c55e;
+    --red:#ef4444;
+    --yellow:#facc15;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    color:var(--text);
+    font-family:Inter,Manrope,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+
+    background:
+        radial-gradient(circle at 20% 20%,#312e81 0%,transparent 30%),
+        radial-gradient(circle at 80% 80%,#581c87 0%,transparent 30%),
+        linear-gradient(135deg,#020617,#111827 50%,#1e1b4b);
+}
+
+/* Зірки */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+
+    background-image:
+        radial-gradient(#fff 1px,transparent 1px),
+        radial-gradient(#fff 1px,transparent 1px);
+
+    background-size:80px 80px,130px 130px;
+    background-position:0 0,40px 70px;
+
+    opacity:.12;
+}
+
+main{
+    width:min(950px,calc(100% - 28px));
+    margin:auto;
+    padding:18px 0 50px;
+    position:relative;
+    z-index:1;
+}
+
+/* Навігація */
+
+.nav{
+    padding:13px 16px;
+    margin-bottom:18px;
+
+    background:#ffffff10;
+    border:1px solid var(--border);
+    border-radius:14px;
+
+    backdrop-filter:blur(14px);
+}
+
+.nav a{
+    color:#fff;
+    font-weight:800;
+    text-decoration:none;
+}
+
+/* Hero */
+
+.hero{
+    padding:30px;
+    margin-bottom:18px;
+
+    border:1px solid var(--border);
+    border-radius:24px;
+
+    background:
+        linear-gradient(135deg,#ffffff14,#ffffff06);
+
+    backdrop-filter:blur(18px);
+
+    box-shadow:
+        0 20px 70px #0005;
+}
+
+.hero h1{
+    margin:0 0 10px;
+    font-size:clamp(30px,6vw,48px);
+}
+
+.hero p{
+    margin:0;
+    color:var(--muted);
+    font-size:17px;
+    line-height:1.6;
+}
+
+/* Game */
+
+.card{
+    padding:24px;
+
+    border:1px solid var(--border);
+    border-radius:24px;
+
+    background:#ffffff0d;
+    backdrop-filter:blur(18px);
+
+    box-shadow:0 20px 70px #0005;
+}
+
+/* Stats */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.stat{
+    padding:13px;
+    text-align:center;
+
+    border:1px solid #ffffff1c;
+    border-radius:14px;
+    background:#02061780;
+}
+
+.stat small{
+    display:block;
+    color:#94a3b8;
+    margin-bottom:4px;
+}
+
+.stat strong{
+    font-size:20px;
+}
+
+/* Level */
+
+.level-info{
+    margin-bottom:18px;
+    padding:17px;
+
+    border-radius:16px;
+
+    background:linear-gradient(135deg,#4f46e520,#8b5cf620);
+    border:1px solid #818cf855;
+}
+
+.level-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+}
+
+.level-title{
+    font-size:20px;
+    font-weight:900;
+}
+
+.level-description{
+    color:#cbd5e1;
+    margin:8px 0 0;
+    line-height:1.5;
+}
+
+/* Grid */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:6px;
+
+    width:min(560px,100%);
+    margin:20px auto;
+
+    padding:8px;
+
+    background:#020617;
+    border:1px solid #ffffff18;
+
+    border-radius:18px;
+
+    box-shadow:
+        inset 0 0 30px #000,
+        0 15px 50px #0007;
+}
+
+.cell{
+    aspect-ratio:1;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:9px;
+
+    background:
+        linear-gradient(135deg,#1e293b,#172033);
+
+    border:1px solid #ffffff09;
+
+    font-size:clamp(19px,4vw,28px);
+
+    transition:
+        transform .15s,
+        background .15s,
+        box-shadow .15s;
+}
+
+.cell:hover{
+    transform:scale(1.04);
+}
+
+.ship{
+    background:
+        radial-gradient(circle,#67e8f9,#2563eb 70%);
+    box-shadow:
+        0 0 25px #22d3eeaa,
+        inset 0 0 15px #fff7;
+}
+
+.portal{
+    background:
+        radial-gradient(circle,#fff,#34d399 35%,#047857 80%);
+    box-shadow:
+        0 0 30px #34d399cc;
+}
+
+.wall{
+    background:
+        linear-gradient(135deg,#475569,#1e293b);
+    box-shadow:
+        inset 0 0 15px #000;
+}
+
+.enemy{
+    background:
+        radial-gradient(circle,#fb7185,#7f1d1d);
+    box-shadow:
+        0 0 20px #ef444477;
+}
+
+.coin{
+    background:
+        radial-gradient(circle,#fde68a,#ca8a04);
+    box-shadow:
+        0 0 18px #facc1577;
+}
+
+/* Controls */
+
+.controls{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+
+    margin:20px auto;
+
+    max-width:300px;
+}
+
+.control{
+    width:58px;
+    height:52px;
+
+    border:0;
+    border-radius:13px;
+
+    color:white;
+
+    background:
+        linear-gradient(135deg,#4f46e5,#7c3aed);
+
+    font-size:22px;
+    font-weight:900;
+
+    cursor:pointer;
+
+    box-shadow:0 7px 20px #0005;
+
+    transition:
+        transform .12s,
+        filter .12s;
+}
+
+.control:hover{
+    filter:brightness(1.15);
+    transform:translateY(-2px);
+}
+
+.control:active{
+    transform:translateY(2px);
+}
+
+.controls-center{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+/* Result */
+
+.result{
+    min-height:48px;
+
+    display:grid;
+    place-items:center;
+
+    margin:15px 0;
+
+    text-align:center;
+
+    padding:12px;
+
+    border-radius:13px;
+
+    background:#02061780;
+
+    font-weight:800;
+}
+
+/* Commands */
+
+.command-box{
+    margin-top:20px;
+    padding:18px;
+
+    border:1px solid #ffffff18;
+    border-radius:16px;
+
+    background:#02061766;
+}
+
+.command-box h3{
+    margin:0 0 10px;
+}
+
+.command-list{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.command{
+    padding:7px 10px;
+
+    border-radius:8px;
+
+    background:#312e81;
+    color:#ddd6fe;
+
+    font-family:monospace;
+    font-weight:800;
+}
+
+/* Buttons */
+
+.actions{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+
+    margin-top:18px;
+}
+
+.action{
+    padding:12px 18px;
+
+    border:0;
+    border-radius:11px;
+
+    color:#fff;
+
+    background:#334155;
+
+    font-weight:800;
+
+    cursor:pointer;
+}
+
+.action.primary{
+    background:
+        linear-gradient(135deg,#4f46e5,#7c3aed);
+}
+
+.action.green{
+    background:
+        linear-gradient(135deg,#059669,#16a34a);
+}
+
+.action:hover{
+    filter:brightness(1.12);
+}
+
+/* Progress */
+
+.progress{
+    height:9px;
+
+    margin-top:15px;
+
+    overflow:hidden;
+
+    border-radius:20px;
+
+    background:#020617;
+}
+
+.progress-bar{
+    height:100%;
+    width:0%;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(90deg,#6366f1,#a855f7,#22d3ee);
+
+    transition:width .3s;
+}
+
+/* Modal */
+
+.overlay{
+    position:fixed;
+    inset:0;
+
+    display:none;
+    place-items:center;
+
+    padding:20px;
+
+    background:#000b;
+
+    z-index:20;
+}
+
+.overlay.show{
+    display:grid;
+}
+
+.modal{
+    width:min(480px,100%);
+
+    padding:30px;
+
+    text-align:center;
+
+    border-radius:25px;
+
+    background:
+        linear-gradient(145deg,#111827,#1e1b4b);
+
+    border:1px solid #ffffff25;
+
+    box-shadow:0 30px 100px #000;
+}
+
+.modal-icon{
+    font-size:70px;
+}
+
+.modal h2{
+    font-size:30px;
+    margin:10px 0;
+}
+
+.modal p{
+    color:#cbd5e1;
+    line-height:1.6;
+}
+
+/* Responsive */
+
+@media(max-width:650px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .card{
+        padding:15px;
+    }
+
+    .hero{
+        padding:22px;
+    }
+
+    .grid{
+        gap:4px;
+        padding:5px;
+    }
+
+    .control{
+        width:52px;
+        height:48px;
+    }
+}
+</style>
+<link rel="stylesheet" href="mobile.css">
+</head>
+
+<body>
+
+<main>
+
+<nav class="nav">
+    <a href="games.html">← Усі ігри</a>
+</nav>
+
+<header class="hero">
+    <h1>🚀 Космічний програміст</h1>
+
+    <p>
+        Керуй космічним кораблем за допомогою команд
+        <strong>MOVE</strong> та <strong>TURN</strong>.
+        Збери енергію ⚡ і дістанься до порталу 🌀.
+    </p>
+</header>
+
+<section class="card">
+
+    <!-- СТАТИСТИКА -->
+
+    <div class="stats">
+
+        <div class="stat">
+            <small>Рівень</small>
+            <strong id="level">1 / 10</strong>
+        </div>
+
+        <div class="stat">
+            <small>Ходи</small>
+            <strong id="moves">0</strong>
+        </div>
+
+        <div class="stat">
+            <small>Енергія</small>
+            <strong id="energy">3 ❤️</strong>
+        </div>
+
+        <div class="stat">
+            <small>Очки</small>
+            <strong id="score">0</strong>
+        </div>
+
+    </div>
+
+    <!-- ІНФОРМАЦІЯ ПРО РІВЕНЬ -->
+
+    <div class="level-info">
+
+        <div class="level-top">
+
+            <div class="level-title" id="level-title">
+                Рівень 1
+            </div>
+
+            <div id="level-number">
+                1/10
+            </div>
+
+        </div>
+
+        <p class="level-description" id="level-description">
+            Дістанься до порталу. Тут немає перешкод.
+        </p>
+
+        <div class="progress">
+            <div class="progress-bar" id="progress"></div>
+        </div>
+
+    </div>
+
+    <!-- ІГРОВЕ ПОЛЕ -->
+
+    <div class="grid" id="grid"></div>
+
+    <!-- КЕРУВАННЯ -->
+
+    <div class="controls">
+
+        <button class="control" data-move="left">
+            ←
+        </button>
+
+        <div class="controls-center">
+
+            <button class="control" data-move="up">
+                ↑
+            </button>
+
+            <button class="control" data-move="down">
+                ↓
+            </button>
+
+        </div>
+
+        <button class="control" data-move="right">
+            →
+        </button>
+
+    </div>
+
+    <!-- РЕЗУЛЬТАТ -->
+
+    <div class="result" id="result">
+        🧑‍🚀 Використовуй стрілки або клавіші W A S D
+    </div>
+
+    <!-- КОМАНДИ -->
+
+    <div class="command-box">
+
+        <h3>💻 Команди програміста</h3>
+
+        <div class="command-list">
+
+            <span class="command">MOVE ↑</span>
+            <span class="command">MOVE ↓</span>
+            <span class="command">MOVE ←</span>
+            <span class="command">MOVE →</span>
+
+        </div>
+
+    </div>
+
+    <!-- ДІЇ -->
+
+    <div class="actions">
+
+        <button class="action primary" id="restart">
+            🔄 Почати рівень спочатку
+        </button>
+
+        <button class="action green" id="next">
+            Наступний рівень →
+        </button>
+
+    </div>
+
+    <a
+        class="nav"
+        style="display:block;margin-top:20px;text-align:center"
+        href="games.html"
+    >
+        ← Повернутися до ігор
+    </a>
+
+</section>
+
+</main>
+
+
+<!-- МОДАЛЬНЕ ВІКНО -->
+
+<div class="overlay" id="overlay">
+
+    <div class="modal">
+
+        <div class="modal-icon" id="modal-icon">
+            🎉
+        </div>
+
+        <h2 id="modal-title">
+            Рівень пройдено!
+        </h2>
+
+        <p id="modal-text">
+            Чудова робота!
+        </p>
+
+        <div class="actions">
+
+            <button
+                class="action primary"
+                id="modal-next"
+            >
+                Наступний рівень →
+            </button>
+
+            <button
+                class="action"
+                id="modal-close"
+            >
+                Закрити
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="game-progress.js"></script>
+<script>
+
+/* =========================================================
+   КОСМІЧНИЙ ПРОГРАМІСТ
+   Повна логіка гри
+========================================================= */
+
+
+/* ---------------------------------------------------------
+   НАЛАШТУВАННЯ
+--------------------------------------------------------- */
+
+const SIZE = 7;
+
+let levelIndex = 0;
+
+let position = {
+    row: 6,
+    col: 0
+};
+
+let startPosition = {
+    row: 6,
+    col: 0
+};
+
+let goal = {
+    row: 0,
+    col: 6
+};
+
+let walls = [];
+
+let enemies = [];
+
+let coins = [];
+
+let moves = 0;
+
+let energy = 3;
+
+let score = 0;
+
+let levelCompleted = false;
+
+
+/* ---------------------------------------------------------
+   РІВНІ
+--------------------------------------------------------- */
+
+const levels = [
+
+    {
+        description:
+            "Дістанься до порталу. Тут немає перешкод.",
+
+        start:[6,0],
+
+        goal:[0,6],
+
+        walls:[],
+
+        enemies:[],
+
+        coins:[[3,3]],
+
+        maxEnergy:3
+    },
+
+    {
+        description:
+            "Обережно! На шляху з'явилися космічні стіни.",
+
+        start:[6,0],
+
+        goal:[0,6],
+
+        walls:[
+            [5,1],
+            [5,2],
+            [4,2],
+            [3,2],
+            [3,3],
+            [3,4],
+            [2,4],
+            [1,4]
+        ],
+
+        enemies:[],
+
+        coins:[
+            [5,4],
+            [2,2]
+        ],
+
+        maxEnergy:3
+    },
+
+    {
+        description:
+            "Тепер на полі є космічний дрон 👾. Не зіткнися з ним.",
+
+        start:[6,0],
+
+        goal:[0,6],
+
+        walls:[
+            [5,1],
+            [4,1],
+            [3,1],
+            [3,2],
+            [3,3],
+            [3,4],
+            [2,4],
+            [1,4]
+        ],
+
+        enemies:[
+            [4,3]
+        ],
+
+        coins:[
+            [6,3],
+            [2,2]
+        ],
+
+        maxEnergy:3
+    },
+
+    {
+        description:
+            "Складніший лабіринт. Плануй маршрут заздалегідь.",
+
+        start:[6,0],
+
+        goal:[0,6],
+
+        walls:[
+            [5,0],
+            [5,1],
+            [5,2],
+            [4,2],
+            [3,2],
+            [2,2],
+            [2,3],
+            [2,4],
+            [3,4],
+            [4,4],
+            [4,5],
+            [4,6],
+            [1,6]
+        ],
+
+        enemies:[
+            [3,3]
+        ],
+
+        coins:[
+            [6,3],
+            [1,2],
+            [3,5]
+        ],
+
+        maxEnergy:3
+    },
+
+    {
+        description:
+            "Дрон охороняє центральну частину галактики.",
+
+        start:[6,0],
+
+        goal:[0,6],
+
+        walls:[
+            [5,0],
+            [5,1],
+            [4,1],
+            [3,1],
+            [3,2],
+            [3,3],
+            [2,3],
+            [1,3],
+            [1,4],
+            [1,5]
+        ],
+
+        enemies:[
+            [4,3],
+            [2,5]
+        ],
+
+        coins:[
+            [6,2],
+            [2,1],
+            [0,3]
+        ],
+
+        maxEnergy:3
+    },
+
+    {
+        description:
+            "Навколо багато перешкод. Знайди правильний маршрут.",
+
+        start:[6,0],
+
+        goal:[0,6],
+
+        walls:[
+            [5,1],
+            [5,2],
+            [4,2],
+            [3,2],
+            [2,2],
+            [2,3],
+            [2,4],
+            [3,4],
+            [4,4],
+            [4,5],
+            [4,6],
+            [1,6],
+            [1,5]
+        ],
+
+        enemies:[
+            [3,3],
+            [2,5]
+        ],
+
+        coins:[
+            [6,3],
+            [3,1],
+            [0,4]
+        ],
+
+        maxEnergy:3
+    },
+
+    {
+        description:
+            "Справжній тест для програміста. Уникай двох дронів.",
+
+        start:[6,0],
+
+        goal:[0,6],
+
+        walls:[
+            [5,0],
+            [5,1],
+            [4,1],
+            [3,1],
+            [3,2],
+            [3,3],
+            [3,4],
+            [2,4],
+            [1,4],
+            [1,5]
+        ],
+
+        enemies:[
+            [4,3],
+            [2,2]
+        ],
+
+        coins:[
+            [6,2],
+            [2,5],
+            [0,3]
+        ],
+
+        maxEnergy:3
+    },
+
+    {
+        description:
+            "Передфінальний рівень. Один неправильний рух може коштувати енергії.",
+
+        start:[6,0],
+
+        goal:[0,6],
+
+        walls:[
+            [5,0],
+            [5,1],
+            [5,2],
+            [4,2],
+            [3,2],
+            [2,2],
+            [2,3],
+            [2,4],
+            [3,4],
+            [4,4],
+            [4,5],
+            [4,6],
+            [1,6],
+            [1,5],
+            [1,4]
+        ],
+
+        enemies:[
+            [3,3],
+            [2,5]
+        ],
+
+        coins:[
+            [6,3],
+            [3,1],
+            [0,3]
+        ],
+
+        maxEnergy:3
+    },
+
+    {
+        description:
+            "Фінальна місія. Пройди лабіринт і відкрий головний портал.",
+
+        start:[6,0],
+
+        goal:[0,6],
+
+        walls:[
+            [5,0],
+            [5,1],
+            [4,1],
+            [3,1],
+            [3,2],
+            [3,3],
+            [2,3],
+            [1,3],
+            [1,4],
+            [1,5],
+            [2,5],
+            [3,5],
+            [3,6],
+            [5,4],
+            [5,5]
+        ],
+
+        enemies:[
+            [4,3],
+            [2,4],
+            [4,6]
+        ],
+
+        coins:[
+            [6,2],
+            [3,4],
+            [0,2],
+            [0,5]
+        ],
+
+        maxEnergy:3
+    },
+
+    {
+        description:
+            "🏆 Галактичний рівень! Доведи, що ти справжній космічний програміст.",
+
+        start:[6,0],
+
+        goal:[0,6],
+
+        walls:[
+            [5,0],
+            [5,1],
+            [5,2],
+            [4,2],
+            [3,2],
+            [2,2],
+            [2,3],
+            [2,4],
+            [2,5],
+            [3,5],
+            [4,5],
+            [4,4],
+            [5,4],
+            [1,4],
+            [1,5]
+        ],
+
+        enemies:[
+            [4,3],
+            [3,4],
+            [1,2]
+        ],
+
+        coins:[
+            [6,3],
+            [3,1],
+            [1,1],
+            [0,3],
+            [0,5]
+        ],
+
+        maxEnergy:3
+    }
+
+];
+
+
+/* ---------------------------------------------------------
+   DOM
+--------------------------------------------------------- */
+
+const grid =
+    document.getElementById("grid");
+
+const result =
+    document.getElementById("result");
+
+const levelText =
+    document.getElementById("level");
+
+const movesText =
+    document.getElementById("moves");
+
+const energyText =
+    document.getElementById("energy");
+
+const scoreText =
+    document.getElementById("score");
+
+const levelTitle =
+    document.getElementById("level-title");
+
+const levelNumber =
+    document.getElementById("level-number");
+
+const levelDescription =
+    document.getElementById("level-description");
+
+const progress =
+    document.getElementById("progress");
+
+const restartButton =
+    document.getElementById("restart");
+
+const nextButton =
+    document.getElementById("next");
+
+const overlay =
+    document.getElementById("overlay");
+
+const modalIcon =
+    document.getElementById("modal-icon");
+
+const modalTitle =
+    document.getElementById("modal-title");
+
+const modalText =
+    document.getElementById("modal-text");
+
+const modalNext =
+    document.getElementById("modal-next");
+
+const modalClose =
+    document.getElementById("modal-close");
+
+
+/* ---------------------------------------------------------
+   ДОПОМІЖНІ ФУНКЦІЇ
+--------------------------------------------------------- */
+
+function samePosition(a,b){
+
+    return (
+        a[0] === b.row &&
+        a[1] === b.col
+    );
+}
+
+
+function arrayPosition(row,col){
+
+    return [row,col];
+
+}
+
+
+function containsPosition(list,row,col){
+
+    return list.some(
+        item =>
+            item[0] === row &&
+            item[1] === col
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   ЗАВАНТАЖЕННЯ РІВНЯ
+--------------------------------------------------------- */
+
+function loadLevel(){
+
+    const data =
+        levels[levelIndex];
+
+    position = {
+        row:data.start[0],
+        col:data.start[1]
+    };
+
+    startPosition = {
+        row:data.start[0],
+        col:data.start[1]
+    };
+
+    goal = {
+        row:data.goal[0],
+        col:data.goal[1]
+    };
+
+    walls =
+        [...data.walls];
+
+    enemies =
+        [...data.enemies];
+
+    coins =
+        [...data.coins];
+
+    moves = 0;
+
+    energy =
+        data.maxEnergy;
+
+    levelCompleted = false;
+
+    levelText.textContent =
+        `${levelIndex + 1} / ${levels.length}`;
+
+    levelNumber.textContent =
+        `${levelIndex + 1}/${levels.length}`;
+
+    levelTitle.textContent =
+        `Рівень ${levelIndex + 1}`;
+
+    levelDescription.textContent =
+        data.description;
+
+    progress.style.width =
+        `${((levelIndex + 1) / levels.length) * 100}%`;
+
+    result.textContent =
+        "🧑‍🚀 Знайди портал 🌀";
+
+    nextButton.disabled =
+        true;
+
+    render();
+
+    updateStats();
+
+}
+
+
+/* ---------------------------------------------------------
+   ВІДОБРАЖЕННЯ
+--------------------------------------------------------- */
+
+function render(){
+
+    grid.innerHTML = "";
+
+    for(let row=0;row<SIZE;row++){
+
+        for(let col=0;col<SIZE;col++){
+
+            const cell =
+                document.createElement("div");
+
+            cell.className = "cell";
+
+            /* Стіна */
+
+            if(
+                containsPosition(
+                    walls,
+                    row,
+                    col
+                )
+            ){
+
+                cell.classList.add("wall");
+
+                cell.textContent =
+                    "🧱";
+
+            }
+
+            /* Монета */
+
+            else if(
+                containsPosition(
+                    coins,
+                    row,
+                    col
+                )
+            ){
+
+                cell.classList.add("coin");
+
+                cell.textContent =
+                    "⚡";
+
+            }
+
+            /* Ворог */
+
+            else if(
+                containsPosition(
+                    enemies,
+                    row,
+                    col
+                )
+            ){
+
+                cell.classList.add("enemy");
+
+                cell.textContent =
+                    "👾";
+
+            }
+
+            /* Портал */
+
+            else if(
+                row === goal.row &&
+                col === goal.col
+            ){
+
+                cell.classList.add("portal");
+
+                cell.textContent =
+                    "🌀";
+
+            }
+
+            /* Корабель */
+
+            if(
+                row === position.row &&
+                col === position.col
+            ){
+
+                cell.classList.add("ship");
+
+                cell.textContent =
+                    "🚀";
+
+            }
+
+            grid.appendChild(cell);
+
+        }
+
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   СТАТИСТИКА
+--------------------------------------------------------- */
+
+function updateStats(){
+
+    movesText.textContent =
+        moves;
+
+    energyText.textContent =
+        `${energy} ❤️`;
+
+    scoreText.textContent =
+        score;
+
+}
+
+
+/* ---------------------------------------------------------
+   РУХ
+--------------------------------------------------------- */
+
+function move(direction){
+
+    if(levelCompleted){
+
+        return;
+
+    }
+
+    let row =
+        position.row;
+
+    let col =
+        position.col;
+
+
+    if(direction === "up")
+        row--;
+
+    if(direction === "down")
+        row++;
+
+    if(direction === "left")
+        col--;
+
+    if(direction === "right")
+        col++;
+
+
+    /* Межі */
+
+    if(
+        row < 0 ||
+        row >= SIZE ||
+        col < 0 ||
+        col >= SIZE
+    ){
+
+        result.textContent =
+            "🚧 Корабель не може вилетіти за межі карти.";
+
+        return;
+
+    }
+
+
+    /* Стіна */
+
+    if(
+        containsPosition(
+            walls,
+            row,
+            col
+        )
+    ){
+
+        energy--;
+
+        moves++;
+
+        result.textContent =
+            "💥 Бум! Ти врізався у космічну стіну.";
+
+        checkEnergy();
+
+        updateStats();
+
+        return;
+
+    }
+
+
+    /* Рух */
+
+    position.row =
+        row;
+
+    position.col =
+        col;
+
+    moves++;
+
+
+    /* Монета */
+
+    const coinIndex =
+        coins.findIndex(
+            item =>
+                item[0] === row &&
+                item[1] === col
+        );
+
+
+    if(coinIndex !== -1){
+
+        coins.splice(
+            coinIndex,
+            1
+        );
+
+        score += 100;
+
+        result.textContent =
+            "⚡ Енергію зібрано! +100 очок";
+
+    }
+
+
+    /* Ворог */
+
+    if(
+        containsPosition(
+            enemies,
+            row,
+            col
+        )
+    ){
+
+        energy--;
+
+        result.textContent =
+            "👾 Дрон атакував корабель! -1 ❤️";
+
+        if(energy <= 0){
+
+            lose();
+
+            return;
+
+        }
+
+    }
+
+
+    /* Портал */
+
+    if(
+        row === goal.row &&
+        col === goal.col
+    ){
+
+        win();
+
+        return;
+
+    }
+
+
+    updateStats();
+
+    render();
+
+}
+
+
+/* ---------------------------------------------------------
+   ПЕРЕВІРКА ЕНЕРГІЇ
+--------------------------------------------------------- */
+
+function checkEnergy(){
+
+    if(energy <= 0){
+
+        lose();
+
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   ПЕРЕМОГА
+--------------------------------------------------------- */
+
+function win(){
+
+    levelCompleted = true;
+
+    score +=
+        Math.max(
+            100,
+            1000 - moves * 10
+        );
+
+    updateStats();
+
+    render();
+
+    result.textContent =
+        "🎉 Портал знайдено! Рівень пройдено!";
+
+    nextButton.disabled =
+        false;
+
+    if(
+        levelIndex ===
+        levels.length - 1
+    ){
+
+        showFinal();
+
+        return;
+
+    }
+
+    showModal(
+        "🎉",
+        "Рівень пройдено!",
+        `Ти знайшов портал за ${moves} ходів. Отримано додаткові очки!`
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   ПОРАЗКА
+--------------------------------------------------------- */
+
+function lose(){
+
+    levelCompleted = true;
+
+    result.textContent =
+        "💥 Енергія закінчилась!";
+
+    showModal(
+        "💥",
+        "Корабель пошкоджено",
+        "Енергія закінчилася. Спробуй пройти цей рівень ще раз."
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   ФІНАЛ
+--------------------------------------------------------- */
+
+function showFinal(){
+
+    window.ITLabProgress.complete("space", score);
+
+    showModal(
+        "🏆",
+        "Галактична місія завершена!",
+        `Ти пройшов усі ${levels.length} рівнів і набрав ${score} очок. Ти справжній космічний програміст!`
+    );
+
+    modalNext.textContent =
+        "🔄 Почати знову";
+
+}
+
+
+/* ---------------------------------------------------------
+   МОДАЛЬНЕ ВІКНО
+--------------------------------------------------------- */
+
+function showModal(
+    icon,
+    title,
+    text
+){
+
+    modalIcon.textContent =
+        icon;
+
+    modalTitle.textContent =
+        title;
+
+    modalText.textContent =
+        text;
+
+    overlay.classList.add(
+        "show"
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   НАСТУПНИЙ РІВЕНЬ
+--------------------------------------------------------- */
+
+function nextLevel(){
+
+    if(
+        levelIndex >=
+        levels.length - 1
+    ){
+
+        levelIndex = 0;
+
+        score = 0;
+
+    }else{
+
+        levelIndex++;
+
+    }
+
+    overlay.classList.remove(
+        "show"
+    );
+
+    loadLevel();
+
+}
+
+
+/* ---------------------------------------------------------
+   ПЕРЕЗАПУСК
+--------------------------------------------------------- */
+
+function restartLevel(){
+
+    overlay.classList.remove(
+        "show"
+    );
+
+    loadLevel();
+
+}
+
+
+/* ---------------------------------------------------------
+   КНОПКИ КЕРУВАННЯ
+--------------------------------------------------------- */
+
+document
+    .querySelectorAll("[data-move]")
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                move(
+                    button.dataset.move
+                );
+
+            }
+        );
+
+    });
+
+
+/* ---------------------------------------------------------
+   КЛАВІАТУРА
+--------------------------------------------------------- */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        const key =
+            event.key.toLowerCase();
+
+        const controls = {
+
+            "arrowup":"up",
+            "w":"up",
+
+            "arrowdown":"down",
+            "s":"down",
+
+            "arrowleft":"left",
+            "a":"left",
+
+            "arrowright":"right",
+            "d":"right"
+
+        };
+
+        if(
+            controls[key]
+        ){
+
+            event.preventDefault();
+
+            move(
+                controls[key]
+            );
+
+        }
+
+    }
+);
+
+
+/* ---------------------------------------------------------
+   КНОПКИ
+--------------------------------------------------------- */
+
+restartButton.addEventListener(
+    "click",
+    restartLevel
+);
+
+
+nextButton.addEventListener(
+    "click",
+    () => {
+
+        if(
+            !nextButton.disabled
+        ){
+
+            nextLevel();
+
+        }
+
+    }
+);
+
+
+modalNext.addEventListener(
+    "click",
+    () => {
+
+        if(
+            levelIndex ===
+            levels.length - 1 &&
+            levelCompleted
+        ){
+
+            levelIndex = 0;
+
+            score = 0;
+
+            overlay.classList.remove(
+                "show"
+            );
+
+            loadLevel();
+
+        }else{
+
+            nextLevel();
+
+        }
+
+    }
+);
+
+
+modalClose.addEventListener(
+    "click",
+    () => {
+
+        overlay.classList.remove(
+            "show"
+        );
+
+    }
+);
+
+
+/* ---------------------------------------------------------
+   СТАРТ
+--------------------------------------------------------- */
+
+loadLevel();
+
+</script>
+
+</body>
+</html>

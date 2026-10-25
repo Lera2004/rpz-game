@@ -1,0 +1,550 @@
+@media (max-width: 800px) {
+  main,
+  .page {
+    width: calc(100% - 24px);
+    padding: 10px 0 32px;
+  }
+
+  .hero {
+    padding: clamp(18px, 5vw, 26px);
+  }
+
+  .hero h1,
+  h1 {
+    font-size: clamp(26px, 7.5vw, 38px);
+    line-height: 1.12;
+    overflow-wrap: anywhere;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  .card,
+  .panel,
+  .section {
+    padding: clamp(16px, 4vw, 22px);
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .game,
+  .builder {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .game > *,
+  .builder > *,
+  .stats > * {
+    min-width: 0;
+  }
+
+  .card:has(.builder) .palette {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .card:has(.builder) .palette h3 {
+    grid-column: 1 / -1;
+    margin: 0;
+  }
+
+  .card:has(.builder) .palette .tag {
+    display: grid;
+    min-width: 0;
+    min-height: 48px;
+    place-items: center;
+    margin: 0;
+    padding: 10px 6px;
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+
+  .card:has(.builder) .preview {
+    min-height: 210px;
+    padding: 12px;
+  }
+
+  .card:has(.builder) .builder > .palette {
+    order: 0;
+  }
+
+  .card:has(.builder) .builder > :last-child {
+    order: 1;
+  }
+
+  .card:has(.builder) .empty {
+    min-height: 180px;
+  }
+
+  .card:has(.game) .controls {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .card:has(.factory) .bins {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .card:has(.terminal) .side {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .card:has(.terminal) .side > .actions {
+    grid-column: 1 / -1;
+  }
+
+  .mission-top,
+  .level-top,
+  .factory-title {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  button,
+  .action,
+  .css-btn,
+  .control,
+  .tag,
+  .game-button,
+  .site-brand,
+  .site-link,
+  .nav a,
+  .back {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+
+  input,
+  select,
+  textarea {
+    max-width: 100%;
+    min-height: 44px;
+    font-size: 16px;
+  }
+
+  .log-row {
+    grid-template-columns: minmax(42px, 60px) minmax(42px, 65px) minmax(0, 1fr);
+  }
+
+  .code-text,
+  .terminal-title,
+  .command {
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 480px) {
+  main,
+  .page {
+    width: calc(100% - 20px);
+    padding-top: 8px;
+  }
+
+  .hero,
+  .card,
+  .panel,
+  .section {
+    padding: 16px;
+  }
+
+  .level-top {
+    flex-direction: column;
+  }
+
+  .factory-title {
+    flex-direction: column;
+  }
+
+  .stats .stat {
+    padding: 10px 6px;
+  }
+
+  .stats .stat strong {
+    font-size: clamp(16px, 5vw, 20px);
+  }
+
+  .card:has(.terminal) .panel {
+    padding: 10px;
+  }
+
+  .card:has(.terminal) .panel h3 {
+    font-size: 13px;
+  }
+
+  .card:has(.terminal) .evidence {
+    min-height: 56px;
+    font-size: 11px;
+  }
+
+  .grid {
+    gap: 4px;
+    padding: 5px;
+  }
+
+  .controls {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .path {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .certificate-card {
+    padding: 16px;
+  }
+
+  .certificate-modal {
+    padding: 8px;
+  }
+}
+
+@media (min-width: 801px) {
+  .card:has(.builder) .builder {
+    grid-template-columns: minmax(280px, 340px) minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .card:has(.builder) .builder > * {
+    min-width: 0;
+  }
+
+  .card:has(.builder) .palette {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    padding: 14px;
+  }
+
+  .card:has(.builder) .palette h3 {
+    grid-column: 1 / -1;
+    margin: 0 0 4px;
+  }
+
+  .card:has(.builder) .palette .tag {
+    display: grid;
+    min-width: 0;
+    min-height: 50px;
+    place-items: center;
+    margin: 0;
+    padding: 10px;
+    font-size: 14px;
+    line-height: 1.25;
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+
+  .card:has(.builder) .preview {
+    min-height: 300px;
+  }
+
+  .card:has(.options) > .actions {
+    flex-wrap: nowrap;
+  }
+
+  .card:has(.options) > .actions .btn {
+    min-width: 0;
+    padding: 9px 12px;
+    font-size: 14px;
+  }
+
+  .card:has(.terminal) .side > .actions {
+    margin: 0;
+  }
+}
+
+@media (min-width: 1000px) {
+  body:has(main > .hero) main {
+    width: min(1360px, calc(100% - 48px));
+    padding-top: 8px;
+  }
+
+  main > .nav {
+    margin-bottom: 8px;
+    padding: 6px 12px;
+  }
+
+  main > .hero {
+    margin-bottom: 8px;
+    padding: 14px 24px;
+  }
+
+  main > .hero h1 {
+    margin: 0 0 4px;
+    font-size: clamp(26px, 2.7vw, 36px);
+  }
+
+  main > .hero p {
+    font-size: 14px;
+    line-height: 1.35;
+  }
+
+  main > .card {
+    padding: 18px;
+  }
+
+  .card .stats {
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .card .stats .stat {
+    padding: 9px;
+  }
+
+  .card .level-box,
+  .card .level-info,
+  .card .mission {
+    margin-bottom: 12px;
+    padding: 12px;
+  }
+
+  .card .level-description,
+  .card .mission p {
+    margin-top: 6px;
+  }
+
+  .card .progress {
+    margin-top: 9px;
+  }
+
+  .card:has(.options) {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(340px, .85fr);
+    gap: 10px 18px;
+    align-content: start;
+  }
+
+  .card:has(.options) > .stats,
+  .card:has(.options) > .level-box,
+  .card:has(.options) > .timer-box,
+  .card:has(.options) > .result,
+  .card:has(.options) > .hint,
+  .card:has(.options) > .explanation,
+  .card:has(.options) > .actions,
+  .card:has(.options) > .back {
+    grid-column: 1 / -1;
+    margin: 0;
+  }
+
+  .card:has(.options) > .stats .stat {
+    padding: 7px;
+  }
+
+  .card:has(.options) > .level-box {
+    padding: 10px;
+  }
+
+  .card:has(.options) > .timer-box {
+    padding: 8px 12px;
+  }
+
+  .card:has(.options) > .question,
+  .card:has(.options) > .code-wrapper {
+    grid-column: 1;
+    margin: 0;
+  }
+
+  .card:has(.options) > .question {
+    grid-row: 4;
+    align-self: end;
+    font-size: 19px;
+  }
+
+  .card:has(.options) > .code-wrapper {
+    grid-row: 5;
+  }
+
+  .card:has(.options) > .options {
+    grid-column: 2;
+    grid-row: 4 / span 2;
+    align-self: center;
+    gap: 8px;
+    margin: 0;
+  }
+
+  .card:has(.options) > .options .option {
+    padding: 10px 14px;
+  }
+
+  .card:has(.options) .code {
+    padding: 10px 14px;
+    font-size: 13px;
+    line-height: 1.35;
+  }
+
+  .card:has(.factory) {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(360px, .85fr);
+    gap: 12px 18px;
+    align-content: start;
+  }
+
+  .card:has(.factory) > .stats,
+  .card:has(.factory) > .level-box,
+  .card:has(.factory) > .back {
+    grid-column: 1 / -1;
+    margin: 0;
+  }
+
+  .card:has(.factory) > .factory {
+    grid-column: 1;
+    grid-row: 3 / span 4;
+    align-self: center;
+  }
+
+  .card:has(.factory) > .code-box,
+  .card:has(.factory) > .buttons,
+  .card:has(.factory) > .result,
+  .card:has(.factory) > .bins {
+    grid-column: 2;
+    margin: 0;
+  }
+
+  .card:has(.factory) > .code-box {
+    padding: 12px;
+  }
+
+  .card:has(.factory) > .bins {
+    gap: 8px;
+  }
+
+  .card:has(.factory) > .bins .bin {
+    padding: 6px 8px;
+  }
+
+  .card:has(.factory) > .bins .bin-icon {
+    margin-bottom: 2px;
+    font-size: 22px;
+  }
+
+  .card:has(#grid) {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(340px, .9fr);
+    gap: 10px 22px;
+    align-content: start;
+  }
+
+  .card:has(#grid) > .stats,
+  .card:has(#grid) > .level-info,
+  .card:has(#grid) > a.nav {
+    grid-column: 1 / -1;
+    margin: 0;
+  }
+
+  .card:has(#grid) > #grid {
+    grid-column: 1;
+    grid-row: 3 / span 5;
+    align-self: center;
+    width: min(520px, 40vw, 40vh);
+    margin: 0 auto;
+  }
+
+  .card:has(#grid) > .controls,
+  .card:has(#grid) > .result,
+  .card:has(#grid) > .command-box,
+  .card:has(#grid) > .actions {
+    grid-column: 2;
+    margin: 0;
+  }
+
+  .card:has(#grid) > .controls {
+    align-self: end;
+  }
+
+  .card:has(#grid) > .command-box {
+    padding: 12px;
+  }
+
+  .card:has(.game) .game {
+    gap: 12px;
+  }
+
+  .card:has(.builder) > .result,
+  .card:has(.builder) > .actions,
+  .card:has(.builder) > .back {
+    margin-top: 8px;
+  }
+
+  .card:has(.game) .controls {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .card:has(.game) .preview {
+    min-height: 210px;
+    padding: 16px;
+  }
+
+  .card:has(.game) .selected {
+    min-height: 0;
+    margin-top: 6px;
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .card:has(.game) .result,
+  .card:has(.game) .actions {
+    margin-top: 6px;
+  }
+
+  .card:has(.game) .panel {
+    padding: 10px;
+  }
+
+  .card:has(.game) .controls {
+    gap: 6px;
+  }
+
+  .card:has(.game) .css-btn {
+    padding: 8px 5px;
+  }
+
+  .card:has(.terminal) .side {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-content: start;
+  }
+
+  .card:has(.terminal) .side > .actions {
+    grid-column: 1 / -1;
+  }
+
+  .card:has(.terminal) .terminal {
+    height: min(40vh, 330px);
+    min-height: 0;
+    overflow: auto;
+  }
+
+  .card:has(.terminal) .side {
+    gap: 8px;
+  }
+
+  .card:has(.terminal) .panel {
+    padding: 8px;
+  }
+
+  .card:has(.terminal) .panel h3 {
+    margin-bottom: 6px;
+  }
+
+  .card:has(.terminal) .tools {
+    gap: 6px;
+  }
+
+  .card:has(.terminal) .side {
+    gap: 6px;
+  }
+
+  .card:has(.terminal) .evidence {
+    min-height: 64px;
+  }
+}

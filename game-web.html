@@ -1,0 +1,2087 @@
+﻿<!doctype html>
+<html lang="uk">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Збери свій сайт | IT LAB</title>
+
+<style>
+
+:root{
+    --primary:#4f46e5;
+    --purple:#7c3aed;
+    --cyan:#0891b2;
+    --green:#16a34a;
+    --red:#ef4444;
+    --yellow:#f59e0b;
+
+    --dark:#0f172a;
+    --muted:#64748b;
+    --bg:#f5f7fb;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+
+    color:var(--dark);
+
+    font-family:
+        Inter,
+        Manrope,
+        system-ui,
+        sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 90% 0%,
+            #cffafe,
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 0% 100%,
+            #e0e7ff,
+            transparent 30%
+        ),
+        var(--bg);
+
+    min-height:100vh;
+}
+
+main{
+    width:min(1000px,calc(100% - 28px));
+
+    margin:auto;
+
+    padding:18px 0 50px;
+}
+
+
+/* =========================
+   NAV
+========================= */
+
+.nav{
+    padding:13px 16px;
+
+    margin-bottom:18px;
+
+    background:#fff;
+
+    border:1px solid #dbe5f2;
+
+    border-radius:15px;
+
+    box-shadow:
+        0 10px 25px #0f172a0b;
+}
+
+.nav a{
+    color:var(--primary);
+
+    text-decoration:none;
+
+    font-weight:900;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    padding:32px;
+
+    margin-bottom:18px;
+
+    border-radius:24px;
+
+    color:#fff;
+
+    background:
+        radial-gradient(
+            circle at 90% 20%,
+            #22d3ee55,
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #020617,
+            #0e7490
+        );
+
+    box-shadow:
+        0 20px 50px #0e749040;
+}
+
+.hero h1{
+    margin:0 0 10px;
+
+    font-size:
+        clamp(30px,6vw,48px);
+}
+
+.hero p{
+    margin:0;
+
+    color:#dbeafe;
+
+    font-size:17px;
+
+    line-height:1.6;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.card{
+    padding:24px;
+
+    background:#fff;
+
+    border:1px solid #dbe5f2;
+
+    border-radius:22px;
+
+    box-shadow:
+        0 15px 40px #0f172a0c;
+}
+
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:10px;
+
+    margin-bottom:18px;
+}
+
+.stat{
+    padding:13px;
+
+    text-align:center;
+
+    background:#f8fafc;
+
+    border:1px solid #e2e8f0;
+
+    border-radius:13px;
+}
+
+.stat small{
+    display:block;
+
+    color:var(--muted);
+
+    margin-bottom:4px;
+}
+
+.stat strong{
+    font-size:20px;
+}
+
+
+/* =========================
+   MISSION
+========================= */
+
+.mission{
+    padding:18px;
+
+    margin-bottom:20px;
+
+    border-radius:16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ecfeff,
+            #eef2ff
+        );
+
+    border:1px solid #bae6fd;
+}
+
+.mission-top{
+    display:flex;
+
+    justify-content:
+        space-between;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+.mission h2{
+    margin:0;
+
+    color:#164e63;
+
+    font-size:21px;
+}
+
+.badge{
+    padding:6px 10px;
+
+    border-radius:8px;
+
+    background:#0891b2;
+
+    color:#fff;
+
+    font-size:12px;
+
+    font-weight:900;
+}
+
+.mission p{
+    color:#475569;
+
+    line-height:1.5;
+
+    margin-bottom:0;
+}
+
+
+/* =========================
+   BUILDER
+========================= */
+
+.builder{
+    display:grid;
+
+    grid-template-columns:
+        220px 1fr;
+
+    gap:18px;
+}
+
+
+/* =========================
+   PALETTE
+========================= */
+
+.palette{
+    padding:15px;
+
+    background:#f8fafc;
+
+    border:1px solid #e2e8f0;
+
+    border-radius:16px;
+
+    height:max-content;
+}
+
+.palette h3{
+    margin:0 0 12px;
+
+    font-size:16px;
+}
+
+.tag{
+    width:100%;
+
+    padding:13px;
+
+    margin-bottom:8px;
+
+    border:0;
+
+    border-radius:10px;
+
+    color:#fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4f46e5,
+            #7c3aed
+        );
+
+    font:inherit;
+
+    font-weight:800;
+
+    cursor:grab;
+
+    transition:
+        transform .15s,
+        filter .15s;
+}
+
+.tag:hover{
+    transform:
+        translateY(-2px);
+
+    filter:brightness(1.08);
+}
+
+.tag:active{
+    cursor:grabbing;
+}
+
+
+/* =========================
+   CANVAS
+========================= */
+
+.canvas-title{
+    margin-bottom:8px;
+
+    font-size:14px;
+
+    color:#64748b;
+
+    font-weight:800;
+}
+
+.preview{
+    min-height:370px;
+
+    padding:18px;
+
+    border:2px dashed #c7d2fe;
+
+    border-radius:16px;
+
+    background:#fff;
+
+    transition:
+        border .2s,
+        background .2s;
+}
+
+.preview.dragging{
+    border-color:
+        #4f46e5;
+
+    background:
+        #eef2ff;
+}
+
+.empty{
+    min-height:330px;
+
+    display:grid;
+
+    place-items:center;
+
+    text-align:center;
+
+    color:#94a3b8;
+}
+
+.empty-icon{
+    font-size:50px;
+
+    display:block;
+
+    margin-bottom:8px;
+}
+
+
+/* =========================
+   WEBSITE BLOCKS
+========================= */
+
+.site-block{
+    position:relative;
+
+    padding:17px;
+
+    margin-bottom:10px;
+
+    border:2px solid transparent;
+
+    border-radius:12px;
+
+    background:#f8fafc;
+
+    cursor:grab;
+
+    transition:
+        transform .15s,
+        border .15s,
+        box-shadow .15s;
+}
+
+.site-block:hover{
+    border-color:#c7d2fe;
+
+    box-shadow:
+        0 5px 15px #4f46e51a;
+}
+
+.site-block.selected{
+    border-color:#4f46e5;
+
+    background:#eef2ff;
+}
+
+.site-block.dragging{
+    opacity:.4;
+}
+
+.block-remove{
+    position:absolute;
+
+    top:7px;
+
+    right:8px;
+
+    width:25px;
+
+    height:25px;
+
+    border:0;
+
+    border-radius:7px;
+
+    background:#fee2e2;
+
+    color:#dc2626;
+
+    cursor:pointer;
+
+    font-weight:900;
+}
+
+
+/* WEBSITE LOOK */
+
+.block-header{
+    padding:25px;
+
+    border-radius:10px;
+
+    color:white;
+
+    text-align:center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4f46e5,
+            #7c3aed
+        );
+}
+
+.block-header h1{
+    margin:0;
+
+    font-size:30px;
+}
+
+.block-text{
+    background:#fff;
+
+    color:#334155;
+
+    line-height:1.7;
+}
+
+.block-image{
+    min-height:100px;
+
+    display:grid;
+
+    place-items:center;
+
+    border-radius:10px;
+
+    color:#475569;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e0f2fe,
+            #e0e7ff
+        );
+
+    font-size:45px;
+}
+
+.block-button{
+    text-align:center;
+
+    padding:20px;
+}
+
+.block-button button{
+    padding:11px 20px;
+
+    border:0;
+
+    border-radius:9px;
+
+    color:#fff;
+
+    background:#16a34a;
+
+    font-weight:900;
+}
+
+.block-card{
+    padding:20px;
+
+    border-radius:11px;
+
+    background:#f1f5f9;
+
+    border:1px solid #e2e8f0;
+}
+
+.block-footer{
+    padding:15px;
+
+    text-align:center;
+
+    color:#64748b;
+
+    background:#f1f5f9;
+
+    border-radius:10px;
+
+    font-size:13px;
+}
+
+
+/* =========================
+   DROP INDICATOR
+========================= */
+
+.drop-indicator{
+    height:5px;
+
+    margin:5px 0;
+
+    border-radius:5px;
+
+    background:#4f46e5;
+}
+
+
+/* =========================
+   RESULT
+========================= */
+
+.result{
+    min-height:55px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    margin-top:18px;
+
+    padding:13px;
+
+    border-radius:12px;
+
+    background:#f8fafc;
+
+    font-weight:900;
+}
+
+.result.success{
+    background:#dcfce7;
+
+    color:#166534;
+}
+
+.result.error{
+    background:#fee2e2;
+
+    color:#991b1b;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.actions{
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    margin-top:18px;
+}
+
+.btn{
+    padding:12px 17px;
+
+    border:0;
+
+    border-radius:10px;
+
+    font:inherit;
+
+    font-weight:900;
+
+    cursor:pointer;
+}
+
+.btn-primary{
+    color:#fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4f46e5,
+            #7c3aed
+        );
+}
+
+.btn-green{
+    color:#fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #059669,
+            #16a34a
+        );
+}
+
+.btn-gray{
+    color:#334155;
+
+    background:#e2e8f0;
+}
+
+.btn:hover{
+    filter:brightness(1.08);
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* =========================
+   HINT
+========================= */
+
+.hint{
+    display:none;
+
+    margin-top:15px;
+
+    padding:14px;
+
+    border-radius:11px;
+
+    background:#fffbeb;
+
+    border:1px solid #fde68a;
+
+    color:#92400e;
+
+    font-weight:700;
+}
+
+.hint.show{
+    display:block;
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+.overlay{
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    place-items:center;
+
+    padding:20px;
+
+    background:#020617aa;
+
+    backdrop-filter:
+        blur(6px);
+
+    z-index:50;
+}
+
+.overlay.show{
+    display:grid;
+}
+
+.modal{
+    width:min(480px,100%);
+
+    padding:30px;
+
+    text-align:center;
+
+    background:#fff;
+
+    border-radius:23px;
+
+    box-shadow:
+        0 30px 100px #0008;
+}
+
+.modal-icon{
+    font-size:65px;
+}
+
+.modal h2{
+    margin:10px 0;
+
+    font-size:28px;
+}
+
+.modal p{
+    color:#64748b;
+
+    line-height:1.6;
+}
+
+
+/* =========================
+   BACK
+========================= */
+
+.back{
+    display:block;
+
+    width:max-content;
+
+    margin:20px auto 0;
+
+    padding:12px 16px;
+
+    border-radius:10px;
+
+    background:#eef2ff;
+
+    color:#3730a3;
+
+    font-weight:900;
+
+    text-decoration:none;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:700px){
+
+    .stats{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .builder{
+        grid-template-columns:1fr;
+    }
+
+    .palette{
+        order:1;
+    }
+
+    .canvas{
+        order:2;
+    }
+
+    .card{
+        padding:16px;
+    }
+
+    .hero{
+        padding:23px;
+    }
+
+}
+
+</style>
+<link rel="stylesheet" href="mobile.css">
+</head>
+
+<body>
+
+<main>
+
+<nav class="nav">
+    <a href="games.html">← Усі ігри</a>
+</nav>
+
+
+<header class="hero">
+
+    <h1>🌐 Збери свій сайт</h1>
+
+    <p>
+        Стань web-розробником!
+        Створюй сторінки з HTML-блоків,
+        виконуй завдання клієнта
+        та отримуй очки за правильну структуру.
+    </p>
+
+</header>
+
+
+<section class="card">
+
+
+<!-- =========================
+     СТАТИСТИКА
+========================= -->
+
+<div class="stats">
+
+    <div class="stat">
+        <small>Рівень</small>
+        <strong id="level">
+            1 / 8
+        </strong>
+    </div>
+
+    <div class="stat">
+        <small>Очки</small>
+        <strong id="score">
+            0
+        </strong>
+    </div>
+
+    <div class="stat">
+        <small>Ходи</small>
+        <strong id="moves">
+            0 / 12
+        </strong>
+    </div>
+
+    <div class="stat">
+        <small>Серія</small>
+        <strong id="combo">
+            0 🔥
+        </strong>
+    </div>
+
+</div>
+
+
+<!-- =========================
+     МІСІЯ
+========================= -->
+
+<div class="mission">
+
+    <div class="mission-top">
+
+        <h2 id="mission-title">
+            🎯 Створи просту веб-сторінку
+        </h2>
+
+        <span
+            class="badge"
+            id="mission-level"
+        >
+            РІВЕНЬ 1
+        </span>
+
+    </div>
+
+    <p id="mission-description">
+        Додай правильні HTML-блоки
+        у потрібному порядку.
+    </p>
+
+</div>
+
+
+<!-- =========================
+     BUILDER
+========================= -->
+
+<div class="builder">
+
+
+<!-- ПАЛІТРА -->
+
+<div class="palette">
+
+    <h3>
+        🧩 HTML-блоки
+    </h3>
+
+    <button
+        class="tag"
+        draggable="true"
+        data-type="header"
+    >
+        &lt;header&gt;
+    </button>
+
+    <button
+        class="tag"
+        draggable="true"
+        data-type="text"
+    >
+        &lt;p&gt; Текст
+    </button>
+
+    <button
+        class="tag"
+        draggable="true"
+        data-type="image"
+    >
+        🖼 Зображення
+    </button>
+
+    <button
+        class="tag"
+        draggable="true"
+        data-type="button"
+    >
+        &lt;button&gt;
+    </button>
+
+    <button
+        class="tag"
+        draggable="true"
+        data-type="card"
+    >
+        🗂 Картка
+    </button>
+
+    <button
+        class="tag"
+        draggable="true"
+        data-type="footer"
+    >
+        &lt;footer&gt;
+    </button>
+
+</div>
+
+
+<!-- ПРЕВ'Ю -->
+
+<div>
+
+    <div class="canvas-title">
+        👁️ Попередній перегляд сайту
+    </div>
+
+    <div
+        class="preview"
+        id="preview"
+    >
+
+        <div class="empty">
+
+            <div>
+
+                <span class="empty-icon">
+                    🧑‍💻
+                </span>
+
+                <strong>
+                    Твій сайт поки порожній
+                </strong>
+
+                <p>
+                    Перетягни HTML-блоки
+                    сюди або натискай
+                    на них зліва.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     RESULT
+========================= -->
+
+<div
+    class="result"
+    id="result"
+>
+    🧩 Побудуй сайт за завданням клієнта.
+</div>
+
+
+<!-- =========================
+     HINT
+========================= -->
+
+<div
+    class="hint"
+    id="hint"
+></div>
+
+
+<!-- =========================
+     ACTIONS
+========================= -->
+
+<div class="actions">
+
+    <button
+        class="btn btn-primary"
+        id="check"
+    >
+        🔍 Перевірити сайт
+    </button>
+
+    <button
+        class="btn btn-gray"
+        id="clear"
+    >
+        🗑 Очистити
+    </button>
+
+    <button
+        class="btn btn-gray"
+        id="hint-button"
+    >
+        💡 Підказка
+    </button>
+
+    <button
+        class="btn btn-green"
+        id="next"
+        style="display:none"
+    >
+        Наступний рівень →
+    </button>
+
+</div>
+
+
+<a
+    class="back"
+    href="games.html"
+>
+    ← Повернутися до ігор
+</a>
+
+</section>
+
+</main>
+
+
+<!-- =========================
+     MODAL
+========================= -->
+
+<div
+    class="overlay"
+    id="overlay"
+>
+
+<div class="modal">
+
+    <div
+        class="modal-icon"
+        id="modal-icon"
+    >
+        🎉
+    </div>
+
+    <h2 id="modal-title">
+        Сайт готовий!
+    </h2>
+
+    <p id="modal-text">
+        Чудова робота!
+    </p>
+
+    <div class="actions">
+
+        <button
+            class="btn btn-primary"
+            id="modal-button"
+        >
+            Продовжити →
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<script src="game-progress.js"></script>
+<script>
+
+/* =========================================================
+   WEB BUILDER GAME
+========================================================= */
+
+
+/* =========================
+   РІВНІ
+========================= */
+
+const levels = [
+
+{
+    title:"🎯 Створи просту веб-сторінку",
+
+    description:
+        "Клієнту потрібна базова сторінка: заголовок, текст та кнопка.",
+
+    required:[
+        "header",
+        "text",
+        "button"
+    ],
+
+    hint:
+        "Сайт повинен мати заголовок, опис та кнопку.",
+
+    points:100
+},
+
+{
+    title:"👨‍💻 Сайт програміста",
+
+    description:
+        "Створи сторінку-портфоліо програміста із заголовком, текстом та карткою.",
+
+    required:[
+        "header",
+        "text",
+        "card"
+    ],
+
+    hint:
+        "Портфоліо добре починається із заголовка, опису та блоку з інформацією.",
+
+    points:150
+},
+
+{
+    title:"📸 Фото-блог",
+
+    description:
+        "Зроби сторінку для блогу: заголовок, зображення, текст і кнопка.",
+
+    required:[
+        "header",
+        "image",
+        "text",
+        "button"
+    ],
+
+    hint:
+        "Після заголовка покажи зображення, потім опис і кнопку.",
+
+    points:200
+},
+
+{
+    title:"🛍️ Магазин",
+
+    description:
+        "Клієнт хоче просту сторінку магазину з картками товарів.",
+
+    required:[
+        "header",
+        "card",
+        "card",
+        "button"
+    ],
+
+    hint:
+        "Магазину потрібен заголовок, дві картки товарів і кнопка.",
+
+    points:250
+},
+
+{
+    title:"📰 Новинний сайт",
+
+    description:
+        "Створи новинну сторінку із заголовком, зображенням, текстом та футером.",
+
+    required:[
+        "header",
+        "image",
+        "text",
+        "footer"
+    ],
+
+    hint:
+        "Не забудь завершити сторінку footer.",
+
+    points:300
+},
+
+{
+    title:"🎮 Сайт про ігри",
+
+    description:
+        "Побудуй сторінку для геймерів із заголовком, зображенням, карткою та кнопкою.",
+
+    required:[
+        "header",
+        "image",
+        "card",
+        "button"
+    ],
+
+    hint:
+        "Головна частина — заголовок, потім візуальний блок, картка та дія.",
+
+    points:350
+},
+
+{
+    title:"🚀 IT LAB",
+
+    description:
+        "Створи сторінку IT LAB: заголовок, текст, дві картки, кнопку та footer.",
+
+    required:[
+        "header",
+        "text",
+        "card",
+        "card",
+        "button",
+        "footer"
+    ],
+
+    hint:
+        "Це великий сайт. Не поспішай і перевір порядок блоків.",
+
+    points:450
+},
+
+{
+    title:"🏆 Фінальний проєкт",
+
+    description:
+        "Замовник хоче повноцінний сайт. Використай усі основні компоненти у правильному порядку.",
+
+    required:[
+        "header",
+        "text",
+        "image",
+        "card",
+        "button",
+        "footer"
+    ],
+
+    hint:
+        "Повноцінна сторінка: заголовок → контент → зображення → картка → дія → footer.",
+
+    points:600
+}
+
+];
+
+
+/* =========================
+   STATE
+========================= */
+
+let level = 0;
+
+let score = 0;
+
+let moves = 0;
+
+let combo = 0;
+
+let blocks = [];
+
+let draggedType = null;
+
+
+/* =========================
+   DOM
+========================= */
+
+const preview =
+    document.getElementById("preview");
+
+const result =
+    document.getElementById("result");
+
+const hint =
+    document.getElementById("hint");
+
+const levelElement =
+    document.getElementById("level");
+
+const scoreElement =
+    document.getElementById("score");
+
+const movesElement =
+    document.getElementById("moves");
+
+const comboElement =
+    document.getElementById("combo");
+
+const missionTitle =
+    document.getElementById("mission-title");
+
+const missionDescription =
+    document.getElementById("mission-description");
+
+const missionLevel =
+    document.getElementById("mission-level");
+
+const checkButton =
+    document.getElementById("check");
+
+const clearButton =
+    document.getElementById("clear");
+
+const hintButton =
+    document.getElementById("hint-button");
+
+const nextButton =
+    document.getElementById("next");
+
+const overlay =
+    document.getElementById("overlay");
+
+const modalIcon =
+    document.getElementById("modal-icon");
+
+const modalTitle =
+    document.getElementById("modal-title");
+
+const modalText =
+    document.getElementById("modal-text");
+
+const modalButton =
+    document.getElementById("modal-button");
+
+
+/* =========================
+   BLOCK HTML
+========================= */
+
+function blockHTML(type){
+
+    const data = {
+
+        header:`
+            <div class="block-header">
+                <h1>Мій крутий сайт</h1>
+                <div>Web Developer</div>
+            </div>
+        `,
+
+        text:`
+            <div class="block-text">
+                <h3>Про мене</h3>
+                <p>
+                    Я створюю сучасні веб-сайти
+                    та вивчаю програмування.
+                </p>
+            </div>
+        `,
+
+        image:`
+            <div class="block-image">
+                🌐
+            </div>
+        `,
+
+        button:`
+            <div class="block-button">
+                <button>
+                    Дізнатися більше
+                </button>
+            </div>
+        `,
+
+        card:`
+            <div class="block-card">
+                <h3>💻 Web Development</h3>
+                <p>
+                    HTML • CSS • JavaScript
+                </p>
+            </div>
+        `,
+
+        footer:`
+            <div class="block-footer">
+                © 2026 IT LAB
+            </div>
+        `
+
+    };
+
+    return data[type];
+
+}
+
+
+/* =========================
+   ADD BLOCK
+========================= */
+
+function addBlock(type){
+
+    const maxMoves =
+        12;
+
+    if(
+        moves >= maxMoves
+    ){
+
+        result.textContent =
+            "⚠️ Ліміт ходів використано.";
+
+        return;
+
+    }
+
+    moves++;
+
+    blocks.push(type);
+
+    render();
+
+    updateStats();
+
+}
+
+
+/* =========================
+   RENDER
+========================= */
+
+function render(){
+
+    preview.innerHTML = "";
+
+    if(
+        blocks.length === 0
+    ){
+
+        preview.innerHTML = `
+
+            <div class="empty">
+
+                <div>
+
+                    <span class="empty-icon">
+                        🧑‍💻
+                    </span>
+
+                    <strong>
+                        Твій сайт поки порожній
+                    </strong>
+
+                    <p>
+                        Додай HTML-блоки
+                        зліва.
+                    </p>
+
+                </div>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    blocks.forEach(
+        (type,index) => {
+
+            const block =
+                document.createElement(
+                    "div"
+                );
+
+            block.className =
+                "site-block";
+
+            block.draggable =
+                true;
+
+            block.dataset.index =
+                index;
+
+            block.dataset.type =
+                type;
+
+            block.innerHTML =
+                blockHTML(type);
+
+
+            const remove =
+                document.createElement(
+                    "button"
+                );
+
+            remove.className =
+                "block-remove";
+
+            remove.textContent =
+                "×";
+
+            remove.title =
+                "Видалити блок";
+
+
+            remove.addEventListener(
+                "click",
+                event => {
+
+                    event.stopPropagation();
+
+                    blocks.splice(
+                        index,
+                        1
+                    );
+
+                    render();
+
+                    updateStats();
+
+                }
+            );
+
+
+            block.appendChild(
+                remove
+            );
+
+
+            block.addEventListener(
+                "dragstart",
+                () => {
+
+                    draggedType =
+                        type;
+
+                    block.classList.add(
+                        "dragging"
+                    );
+
+                }
+            );
+
+
+            block.addEventListener(
+                "dragend",
+                () => {
+
+                    block.classList.remove(
+                        "dragging"
+                    );
+
+                }
+            );
+
+
+            block.addEventListener(
+                "dragover",
+                event => {
+
+                    event.preventDefault();
+
+                }
+            );
+
+
+            block.addEventListener(
+                "drop",
+                event => {
+
+                    event.preventDefault();
+
+                    const from =
+                        blocks.indexOf(
+                            draggedType
+                        );
+
+                    const to =
+                        index;
+
+                    if(
+                        from !== -1 &&
+                        from !== to
+                    ){
+
+                        const item =
+                            blocks.splice(
+                                from,
+                                1
+                            )[0];
+
+                        blocks.splice(
+                            to,
+                            0,
+                            item
+                        );
+
+                        render();
+
+                    }
+
+                }
+            );
+
+
+            preview.appendChild(
+                block
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================
+   PALETTE DRAG
+========================= */
+
+document
+    .querySelectorAll(".tag")
+    .forEach(
+        button => {
+
+            button.addEventListener(
+                "dragstart",
+                () => {
+
+                    draggedType =
+                        button.dataset.type;
+
+                }
+            );
+
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    addBlock(
+                        button.dataset.type
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================
+   DROP TO PREVIEW
+========================= */
+
+preview.addEventListener(
+    "dragover",
+    event => {
+
+        event.preventDefault();
+
+        preview.classList.add(
+            "dragging"
+        );
+
+    }
+);
+
+
+preview.addEventListener(
+    "dragleave",
+    () => {
+
+        preview.classList.remove(
+            "dragging"
+        );
+
+    }
+);
+
+
+preview.addEventListener(
+    "drop",
+    event => {
+
+        event.preventDefault();
+
+        preview.classList.remove(
+            "dragging"
+        );
+
+
+        if(
+            draggedType
+        ){
+
+            addBlock(
+                draggedType
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================
+   CHECK
+========================= */
+
+checkButton.addEventListener(
+    "click",
+    checkWebsite
+);
+
+
+function checkWebsite(){
+
+    const data =
+        levels[level];
+
+    const required =
+        data.required;
+
+
+    if(
+        blocks.length !==
+        required.length
+    ){
+
+        combo = 0;
+
+        result.textContent =
+            `❌ Потрібно ${required.length} блоків. Зараз використано ${blocks.length}.`;
+
+        result.className =
+            "result error";
+
+        return;
+
+    }
+
+
+    let correct = true;
+
+
+    for(
+        let i=0;
+        i<required.length;
+        i++
+    ){
+
+        if(
+            blocks[i] !==
+            required[i]
+        ){
+
+            correct = false;
+
+            break;
+
+        }
+
+    }
+
+
+    if(correct){
+
+        combo++;
+
+        const bonus =
+            combo * 50;
+
+        const gained =
+            data.points +
+            bonus -
+            Math.max(
+                0,
+                moves -
+                required.length
+            ) * 10;
+
+        score +=
+            Math.max(
+                50,
+                gained
+            );
+
+
+        result.textContent =
+            `🎉 Ідеально! +${Math.max(50,gained)} очок`;
+
+        result.className =
+            "result success";
+
+
+        nextButton.style.display =
+            "inline-block";
+
+
+        if(
+            level ===
+            levels.length - 1
+        ){
+
+            setTimeout(
+                finishGame,
+                500
+            );
+
+        }
+
+    }else{
+
+        combo = 0;
+
+        result.textContent =
+            "❌ Структура сайту неправильна. Перевір порядок блоків.";
+
+        result.className =
+            "result error";
+
+    }
+
+
+    updateStats();
+
+}
+
+
+/* =========================
+   CLEAR
+========================= */
+
+clearButton.addEventListener(
+    "click",
+    () => {
+
+        blocks = [];
+
+        moves = 0;
+
+        result.textContent =
+            "🗑 Конструктор очищено.";
+
+        result.className =
+            "result";
+
+        nextButton.style.display =
+            "none";
+
+        render();
+
+        updateStats();
+
+    }
+);
+
+
+/* =========================
+   HINT
+========================= */
+
+hintButton.addEventListener(
+    "click",
+    () => {
+
+        hint.textContent =
+            `💡 ${levels[level].hint}`;
+
+        hint.classList.add(
+            "show"
+        );
+
+    }
+);
+
+
+/* =========================
+   NEXT
+========================= */
+
+nextButton.addEventListener(
+    "click",
+    () => {
+
+        if(
+            level <
+            levels.length - 1
+        ){
+
+            level++;
+
+            blocks = [];
+
+            moves = 0;
+
+            hint.classList.remove(
+                "show"
+            );
+
+            nextButton.style.display =
+                "none";
+
+            loadLevel();
+
+        }
+
+    }
+);
+
+
+/* =========================
+   LOAD LEVEL
+========================= */
+
+function loadLevel(){
+
+    const data =
+        levels[level];
+
+    levelElement.textContent =
+        `${level + 1} / ${levels.length}`;
+
+    missionLevel.textContent =
+        `РІВЕНЬ ${level + 1}`;
+
+    missionTitle.textContent =
+        data.title;
+
+    missionDescription.textContent =
+        data.description;
+
+    result.textContent =
+        "🧩 Побудуй сайт за завданням.";
+
+    result.className =
+        "result";
+
+    render();
+
+    updateStats();
+
+}
+
+
+/* =========================
+   STATS
+========================= */
+
+function updateStats(){
+
+    scoreElement.textContent =
+        score;
+
+    movesElement.textContent =
+        `${moves} / 12`;
+
+    comboElement.textContent =
+        `${combo} 🔥`;
+
+}
+
+
+/* =========================
+   FINAL
+========================= */
+
+function finishGame(){
+
+    window.ITLabProgress.complete("web", score);
+
+    modalIcon.textContent =
+        "🏆";
+
+    modalTitle.textContent =
+        "Ти створив власну веб-студію!";
+
+    modalText.textContent =
+        `Вітаємо! Ти пройшов усі ${levels.length} рівнів та набрав ${score} очок. Тепер ти справжній web-розробник IT LAB!`;
+
+    modalButton.textContent =
+        "🔄 Зіграти ще раз";
+
+
+    modalButton.onclick =
+        () => {
+
+            overlay.classList.remove(
+                "show"
+            );
+
+            level = 0;
+
+            score = 0;
+
+            moves = 0;
+
+            combo = 0;
+
+            blocks = [];
+
+            loadLevel();
+
+        };
+
+
+    overlay.classList.add(
+        "show"
+    );
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+loadLevel();
+
+</script>
+
+</body>
+</html>

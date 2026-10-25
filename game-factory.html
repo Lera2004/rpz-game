@@ -1,0 +1,943 @@
+﻿<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Програміст на заводі | IT LAB</title>
+
+<style>
+:root {
+  --primary: #4f46e5;
+  --primary-dark: #3730a3;
+  --dark: #0f172a;
+  --muted: #64748b;
+  --border: #dbe5f2;
+  --bg: #f5f7fb;
+  --success: #16a34a;
+  --danger: #dc2626;
+  --warning: #f59e0b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 10% 0%, #cffafe, transparent 30%),
+    radial-gradient(circle at 90% 20%, #ddd6fe, transparent 30%),
+    var(--bg);
+  color: var(--dark);
+  font-family: Inter, Manrope, system-ui, sans-serif;
+}
+
+main {
+  width: min(950px, calc(100% - 28px));
+  margin: auto;
+  padding: 18px 0 40px;
+}
+
+/* NAV */
+
+.nav {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 13px 16px;
+  margin-bottom: 18px;
+  box-shadow: 0 10px 25px #0f172a0b;
+}
+
+.nav a {
+  color: var(--primary);
+  font-weight: 900;
+  text-decoration: none;
+}
+
+/* HERO */
+
+.hero {
+  padding: 30px;
+  border-radius: 22px;
+  color: white;
+  background:
+    radial-gradient(circle at 80% 20%, #22d3ee44, transparent 30%),
+    linear-gradient(135deg, #0f172a, #155e75);
+  margin-bottom: 18px;
+  box-shadow: 0 20px 45px #0f172a20;
+}
+
+.hero h1 {
+  margin: 0 0 8px;
+  font-size: clamp(27px, 5vw, 42px);
+}
+
+.hero p {
+  margin: 0;
+  color: #dbeafe;
+  font-size: 17px;
+}
+
+/* CARD */
+
+.card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 24px;
+  box-shadow: 0 10px 30px #0f172a0b;
+}
+
+/* STATS */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.stat {
+  padding: 14px;
+  border-radius: 14px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  text-align: center;
+}
+
+.stat small {
+  display: block;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.stat strong {
+  font-size: 22px;
+}
+
+/* LEVEL */
+
+.level-box {
+  padding: 17px;
+  border-radius: 16px;
+  background: #eef2ff;
+  border: 1px solid #c7d2fe;
+  margin-bottom: 20px;
+}
+
+.level-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+}
+
+.level-title {
+  font-weight: 900;
+  color: var(--primary-dark);
+}
+
+.progress {
+  height: 8px;
+  background: #c7d2fe;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 12px;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 20%;
+  background: var(--primary);
+  transition: width .3s;
+}
+
+/* FACTORY */
+
+.factory {
+  background: #0f172a;
+  border-radius: 20px;
+  padding: 20px;
+  color: white;
+  overflow: hidden;
+}
+
+.factory-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.factory-title strong {
+  font-size: 18px;
+}
+
+.factory-status {
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+/* BELT */
+
+.belt {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 135px;
+  padding: 20px;
+  margin: 15px 0;
+  border-radius: 16px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #334155 0,
+      #334155 35px,
+      #475569 35px,
+      #475569 70px
+    );
+  border: 5px solid #64748b;
+  box-shadow: inset 0 0 30px #0008;
+}
+
+.belt::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  height: 5px;
+  background: #94a3b8;
+  opacity: .5;
+}
+
+.item {
+  position: relative;
+  z-index: 2;
+  font-size: 72px;
+  filter: drop-shadow(0 10px 8px #0008);
+  animation: float .9s infinite alternate;
+}
+
+@keyframes float {
+  from {
+    transform: translateY(-3px);
+  }
+  to {
+    transform: translateY(3px);
+  }
+}
+
+/* CODE */
+
+.code-box {
+  margin-top: 18px;
+  background: #020617;
+  border-radius: 14px;
+  padding: 17px;
+  font-family: Consolas, monospace;
+}
+
+.code-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+}
+
+.code-number {
+  color: #64748b;
+  width: 22px;
+}
+
+.code-select {
+  background: #1e293b;
+  color: white;
+  border: 1px solid #475569;
+  border-radius: 7px;
+  padding: 8px;
+  font-family: inherit;
+}
+
+.code-text {
+  color: #a5b4fc;
+}
+
+/* BINS */
+
+.bins {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.bin {
+  padding: 20px 10px;
+  border: 2px dashed #94a3b8;
+  border-radius: 15px;
+  text-align: center;
+  font-weight: 900;
+  cursor: pointer;
+  transition: .2s;
+  background: white;
+}
+
+.bin:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px #0f172a15;
+}
+
+.bin-icon {
+  display: block;
+  font-size: 35px;
+  margin-bottom: 6px;
+}
+
+.red {
+  color: #dc2626;
+  background: #fee2e2;
+}
+
+.blue {
+  color: #2563eb;
+  background: #dbeafe;
+}
+
+.green {
+  color: #16a34a;
+  background: #dcfce7;
+}
+
+/* RESULT */
+
+.result {
+  min-height: 30px;
+  margin: 18px 0 5px;
+  padding: 13px;
+  border-radius: 12px;
+  font-weight: 800;
+  text-align: center;
+  background: #f8fafc;
+}
+
+.result.success {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.result.error {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* BUTTONS */
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+
+button {
+  border: 0;
+  border-radius: 10px;
+  padding: 11px 15px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: .2s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+.primary {
+  color: white;
+  background: var(--primary);
+}
+
+.primary:hover {
+  background: var(--primary-dark);
+}
+
+.secondary {
+  background: #e2e8f0;
+  color: #334155;
+}
+
+.next {
+  display: none;
+  color: white;
+  background: var(--success);
+}
+
+/* FOOTER */
+
+.back {
+  display: inline-block;
+  margin-top: 20px;
+  color: var(--primary);
+  font-weight: 900;
+  text-decoration: none;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 700px) {
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .bins {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding: 23px;
+  }
+
+  .card {
+    padding: 15px;
+  }
+}
+</style>
+<link rel="stylesheet" href="mobile.css">
+</head>
+
+<body>
+
+<main>
+
+<nav class="nav">
+  <a href="games.html">← Усі ігри</a>
+</nav>
+
+<header class="hero">
+  <h1>🏭 Програміст на заводі</h1>
+  <p>
+    Запрограмуй автоматичний сортувальник.
+    Твоє завдання — навчити робота правильно розподіляти деталі.
+  </p>
+</header>
+
+<section class="card">
+
+  <!-- STATS -->
+
+  <div class="stats">
+
+    <div class="stat">
+      <small>Рівень</small>
+      <strong id="level">1</strong>
+    </div>
+
+    <div class="stat">
+      <small>Очки</small>
+      <strong id="score">0</strong>
+    </div>
+
+    <div class="stat">
+      <small>Життя</small>
+      <strong id="lives">❤️❤️❤️</strong>
+    </div>
+
+    <div class="stat">
+      <small>Час</small>
+      <strong id="timer">30</strong>
+    </div>
+
+  </div>
+
+  <!-- LEVEL -->
+
+  <div class="level-box">
+
+    <div class="level-top">
+
+      <div>
+        <div class="level-title" id="levelTitle">
+          Рівень 1 — Основи
+        </div>
+
+        <div id="levelTask">
+          Навчи сортувальник знаходити правильний контейнер.
+        </div>
+      </div>
+
+      <strong id="levelNumber">
+        1 / 5
+      </strong>
+
+    </div>
+
+    <div class="progress">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+  </div>
+
+  <!-- FACTORY -->
+
+  <div class="factory">
+
+    <div class="factory-title">
+
+      <strong>⚙️ ВИРОБНИЧА ЛІНІЯ</strong>
+
+      <span class="factory-status" id="factoryStatus">
+        Система працює
+      </span>
+
+    </div>
+
+    <div class="belt">
+
+      <div class="item" id="item">
+        🔴
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- CODE -->
+
+  <div class="code-box">
+
+    <div style="color:#94a3b8;margin-bottom:10px">
+      💻 Логіка сортувальника:
+    </div>
+
+    <div class="code-line">
+
+      <span class="code-number">01</span>
+
+      <span class="code-text">
+        IF колір =
+      </span>
+
+      <select class="code-select" id="colorSelect">
+        <option value="red">🔴 ЧЕРВОНИЙ</option>
+        <option value="blue">🔵 СИНІЙ</option>
+        <option value="green">🟢 ЗЕЛЕНИЙ</option>
+      </select>
+
+    </div>
+
+    <div class="code-line">
+
+      <span class="code-number">02</span>
+
+      <span class="code-text">
+        THEN →
+      </span>
+
+      <select class="code-select" id="binSelect">
+        <option value="A">Контейнер A</option>
+        <option value="B">Контейнер B</option>
+        <option value="C">Контейнер C</option>
+      </select>
+
+    </div>
+
+  </div>
+
+  <div class="buttons">
+
+    <button class="primary" id="run">
+      ▶ Запустити програму
+    </button>
+
+    <button class="secondary" id="reset">
+      ↻ Скинути
+    </button>
+
+    <button class="next" id="next">
+      Наступний рівень →
+    </button>
+
+  </div>
+
+  <div class="result" id="result">
+    Напиши правильну умову та запусти програму.
+  </div>
+
+  <!-- BINS -->
+
+  <div class="bins">
+
+    <div class="bin red" data-bin="A">
+      <span class="bin-icon">🟥</span>
+      Контейнер A
+      <small>Червоні</small>
+    </div>
+
+    <div class="bin blue" data-bin="B">
+      <span class="bin-icon">🟦</span>
+      Контейнер B
+      <small>Сині</small>
+    </div>
+
+    <div class="bin green" data-bin="C">
+      <span class="bin-icon">🟩</span>
+      Контейнер C
+      <small>Зелені</small>
+    </div>
+
+  </div>
+
+  <a class="back" href="games.html">
+    ← Повернутися до ігор
+  </a>
+
+</section>
+
+</main>
+
+
+<script src="game-progress.js"></script>
+<script>
+
+/* =========================
+   GAME DATA
+========================= */
+
+const levels = [
+
+  {
+    title: "Рівень 1 — Основи",
+    task: "Навчи сортувальник правильно визначати червоні деталі.",
+    item: "🔴",
+    color: "red",
+    correctBin: "A"
+  },
+
+  {
+    title: "Рівень 2 — Новий колір",
+    task: "Тепер сортувальник отримав синю деталь.",
+    item: "🔵",
+    color: "blue",
+    correctBin: "B"
+  },
+
+  {
+    title: "Рівень 3 — Ще одна умова",
+    task: "Завод отримав зелену деталь. Запрограмуй її маршрут.",
+    item: "🟢",
+    color: "green",
+    correctBin: "C"
+  },
+
+  {
+    title: "Рівень 4 — Автоматизація",
+    task: "Ти вже знаєш правила. Використай правильну логіку.",
+    item: "🔵",
+    color: "blue",
+    correctBin: "B"
+  },
+
+  {
+    title: "Рівень 5 — Фінальний тест",
+    task: "Останнє випробування програміста. Не помились!",
+    item: "🔴",
+    color: "red",
+    correctBin: "A"
+  }
+
+];
+
+
+/* =========================
+   STATE
+========================= */
+
+let currentLevel = 0;
+let score = 0;
+let lives = 3;
+let time = 30;
+let timerInterval = null;
+let completed = false;
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const item = document.getElementById("item");
+const level = document.getElementById("level");
+const scoreEl = document.getElementById("score");
+const livesEl = document.getElementById("lives");
+const timerEl = document.getElementById("timer");
+
+const levelTitle = document.getElementById("levelTitle");
+const levelTask = document.getElementById("levelTask");
+const levelNumber = document.getElementById("levelNumber");
+const progressBar = document.getElementById("progressBar");
+
+const result = document.getElementById("result");
+const factoryStatus = document.getElementById("factoryStatus");
+
+const colorSelect = document.getElementById("colorSelect");
+const binSelect = document.getElementById("binSelect");
+
+const runButton = document.getElementById("run");
+const resetButton = document.getElementById("reset");
+const nextButton = document.getElementById("next");
+
+
+/* =========================
+   LOAD LEVEL
+========================= */
+
+function loadLevel() {
+
+  const data = levels[currentLevel];
+
+  item.textContent = data.item;
+
+  level.textContent = currentLevel + 1;
+
+  levelTitle.textContent = data.title;
+
+  levelTask.textContent = data.task;
+
+  levelNumber.textContent =
+    `${currentLevel + 1} / ${levels.length}`;
+
+  progressBar.style.width =
+    `${((currentLevel + 1) / levels.length) * 100}%`;
+
+  colorSelect.value = "red";
+  binSelect.value = "A";
+
+  result.textContent =
+    "Напиши правильну умову та запусти програму.";
+
+  result.className = "result";
+
+  nextButton.style.display = "none";
+
+  completed = false;
+
+  resetTimer();
+
+}
+
+
+/* =========================
+   TIMER
+========================= */
+
+function resetTimer() {
+
+  clearInterval(timerInterval);
+
+  time = 30;
+
+  timerEl.textContent = time;
+
+  timerInterval = setInterval(() => {
+
+    time--;
+
+    timerEl.textContent = time;
+
+    if (time <= 0) {
+
+      clearInterval(timerInterval);
+
+      result.textContent =
+        "⏰ Час вийшов! Спробуй ще раз.";
+
+      result.className = "result error";
+
+      factoryStatus.textContent =
+        "Система зупинена";
+
+    }
+
+  }, 1000);
+
+}
+
+
+/* =========================
+   RUN PROGRAM
+========================= */
+
+runButton.addEventListener("click", () => {
+
+  if (completed) return;
+
+  const data = levels[currentLevel];
+
+  const selectedColor = colorSelect.value;
+
+  const selectedBin = binSelect.value;
+
+
+  if (
+    selectedColor === data.color &&
+    selectedBin === data.correctBin
+  ) {
+
+    clearInterval(timerInterval);
+
+    const bonus = time * 2;
+
+    score += 100 + bonus;
+
+    scoreEl.textContent = score;
+
+    result.textContent =
+      `✅ Програма виконана правильно! +${100 + bonus} XP`;
+
+    result.className = "result success";
+
+    factoryStatus.textContent =
+      "Сортування успішне ✓";
+
+    completed = true;
+
+    if (currentLevel === levels.length - 1) {
+
+      setTimeout(showFinish, 700);
+
+    } else {
+
+      nextButton.style.display = "inline-block";
+
+    }
+
+  } else {
+
+    lives--;
+
+    updateLives();
+
+    result.textContent =
+      "❌ Помилка алгоритму. Перевір умову IF.";
+
+    result.className = "result error";
+
+    factoryStatus.textContent =
+      "Помилка сортування";
+
+    if (lives <= 0) {
+
+      gameOver();
+
+    }
+
+  }
+
+});
+
+
+/* =========================
+   NEXT LEVEL
+========================= */
+
+nextButton.addEventListener("click", () => {
+
+  currentLevel++;
+
+  loadLevel();
+
+});
+
+
+/* =========================
+   RESET
+========================= */
+
+resetButton.addEventListener("click", () => {
+
+  currentLevel = 0;
+
+  score = 0;
+
+  lives = 3;
+
+  scoreEl.textContent = 0;
+
+  updateLives();
+
+  loadLevel();
+
+});
+
+
+/* =========================
+   LIVES
+========================= */
+
+function updateLives() {
+
+  livesEl.textContent =
+    "❤️".repeat(lives) +
+    "🖤".repeat(3 - lives);
+
+}
+
+
+/* =========================
+   GAME OVER
+========================= */
+
+function gameOver() {
+
+  clearInterval(timerInterval);
+
+  result.textContent =
+    "💥 Система зупинилася. Натисни «Скинути» та спробуй ще раз.";
+
+  result.className = "result error";
+
+  runButton.disabled = true;
+
+}
+
+
+/* =========================
+   FINISH
+========================= */
+
+function showFinish() {
+
+  clearInterval(timerInterval);
+  window.ITLabProgress.complete("factory", score);
+
+  factoryStatus.textContent =
+    "Виробництво завершено ✓";
+
+  result.className = "result success";
+
+  result.innerHTML = `
+    🎉 <strong>Вітаємо!</strong><br><br>
+    Ти пройшов усі рівні та запрограмував завод!<br><br>
+    🧠 Твій результат: <strong>${score} XP</strong>
+  `;
+
+  runButton.style.display = "none";
+
+  nextButton.style.display = "none";
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+loadLevel();
+
+</script>
+
+</body>
+</html>

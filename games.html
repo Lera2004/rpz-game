@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ігри програміста | IT LAB</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root { --primary:#4f46e5; --purple:#7c3aed; --cyan:#06b6d4; --dark:#0f172a; --muted:#64748b; --bg:#f5f7fb; --border:#dbe5f2; --white:#fff; }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100vh; color:var(--dark); font-family:"Manrope",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 28%),radial-gradient(circle at 90% 10%,rgba(6,182,212,.10),transparent 25%),var(--bg); }
+    .page { width:min(1600px,calc(100% - 64px)); margin:0 auto; padding:18px 0 48px; }
+    .site-nav { display:flex; align-items:center; justify-content:space-between; gap:18px; margin-bottom:18px; padding:12px 16px; border:1px solid var(--border); border-radius:16px; background:rgba(255,255,255,.88); box-shadow:0 8px 25px rgba(15,23,42,.05); }
+    .site-brand,.site-link { text-decoration:none; }
+    .site-brand { color:var(--primary); font-weight:900; letter-spacing:.4px; }
+    .site-links { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:6px; }
+    .site-link { padding:8px 11px; border-radius:10px; color:var(--muted); font-size:13px; font-weight:700; }
+    .site-link:hover,.site-link.active { color:var(--primary); background:#eef2ff; }
+    .hero,.section { border:1px solid var(--border); border-radius:24px; background:var(--white); box-shadow:0 12px 28px rgba(15,23,42,.06); }
+    .hero { margin-bottom:18px; padding:clamp(30px,6vw,60px); color:#fff; background:radial-gradient(circle at 85% 20%,rgba(6,182,212,.25),transparent 25%),radial-gradient(circle at 20% 90%,rgba(124,58,237,.35),transparent 30%),linear-gradient(135deg,#0f172a,#1e1b4b 55%,#312e81); }
+    .eyebrow { color:#c7d2fe; font-size:13px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; }
+    h1 { max-width:780px; margin:14px 0 12px; font-size:clamp(34px,6vw,60px); line-height:1.05; }
+    .hero p { max-width:740px; margin:0; color:#dbeafe; line-height:1.65; }
+    .section { padding:clamp(22px,4vw,34px); }
+    .section + .section { margin-top:18px; }
+    .section-title { margin:0 0 8px; font-size:clamp(22px,3vw,30px); }
+    .section-subtitle { margin:0 0 22px; color:var(--muted); line-height:1.6; }
+    .game-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:15px; }
+    .game-card { display:flex; min-height:230px; flex-direction:column; padding:22px; border:1px solid #c7d2fe; border-radius:18px; background:linear-gradient(135deg,#f8fafc,#eef2ff); transition:.25s; }
+    .game-card:hover { transform:translateY(-4px); border-color:var(--primary); box-shadow:0 14px 28px rgba(79,70,229,.14); }
+    .game-card.ready { background:linear-gradient(135deg,#ecfeff,#eef2ff); border-color:#a5f3fc; }
+    .game-icon { font-size:34px; }
+    .game-card h3 { margin:12px 0 7px; font-size:19px; }
+    .game-card p { margin:0 0 14px; color:var(--muted); font-size:14px; line-height:1.55; }
+    .game-meta { display:flex; flex-wrap:wrap; gap:7px; margin-top:auto; }
+    .tag { padding:6px 9px; border-radius:8px; color:#4338ca; background:#e0e7ff; font-size:11px; font-weight:800; }
+    .game-button { display:inline-flex; align-items:center; justify-content:center; margin-top:16px; padding:11px 14px; border:0; border-radius:10px; color:#fff; background:linear-gradient(135deg,var(--primary),var(--purple)); font:inherit; font-size:13px; font-weight:800; text-decoration:none; cursor:pointer; }
+    .game-button.disabled { color:#64748b; background:#e2e8f0; cursor:default; }
+    .path { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; }
+    .path-step { padding:16px 12px; border-radius:14px; background:#f8fafc; border:1px solid var(--border); text-align:center; }
+    .path-step strong { display:block; margin-top:7px; font-size:13px; }
+    .path-step span { font-size:26px; }
+    .cta { margin-top:18px; padding:22px; border-radius:18px; color:#fff; background:linear-gradient(135deg,#4f46e5,#7c3aed); }
+    .cta h2 { margin:0 0 8px; font-size:23px; }
+    .cta p { margin:0; color:#e0e7ff; line-height:1.55; }
+    .certificate-button { display:inline-flex; align-items:center; justify-content:center; margin-top:16px; padding:12px 18px; border:0; border-radius:11px; color:#fff; background:linear-gradient(135deg,#f59e0b,#f97316); font:inherit; font-weight:900; cursor:pointer; }
+    .certificate-modal { display:none; position:fixed; inset:0; z-index:60; align-items:center; justify-content:center; padding:16px; background:rgba(15,23,42,.68); backdrop-filter:blur(7px); }
+    .certificate-modal.open { display:flex; }
+    .certificate-card { position:relative; display:flex; flex-direction:column; align-items:center; gap:16px; width:min(1000px,100%); max-height:96vh; overflow:auto; padding:24px; border:1px solid #c7d2fe; border-radius:22px; background:#fff; box-shadow:0 28px 70px rgba(15,23,42,.3); }
+    #certificate-close { position:absolute; top:12px; right:12px; width:38px; height:38px; border:0; border-radius:50%; color:var(--primary); background:#eef2ff; font-size:22px; cursor:pointer; }
+    .certificate-card h2 { margin:0; text-align:center; }
+    .certificate-card > p { margin:-8px 0 0; color:var(--muted); text-align:center; line-height:1.5; }
+    .certificate-form { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; width:min(100%,600px); }
+    .certificate-form input { flex:1 1 280px; min-width:0; padding:12px 14px; border:1px solid var(--border); border-radius:10px; font:inherit; }
+    .certificate-status { min-height:1.5em; margin:0; color:var(--muted); font-size:13px; text-align:center; }
+    .certificate-actions { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; }
+    .certificate-actions button { padding:10px 14px; border:0; border-radius:9px; color:#fff; background:#059669; font:inherit; font-weight:800; cursor:pointer; }
+    .certificate-actions button.secondary { color:#334155; background:#f1f5f9; border:1px solid var(--border); }
+    @media (max-width:760px) { .page { width:calc(100% - 24px); padding-top:10px; } .site-nav { align-items:flex-start; flex-direction:column; } .site-links { justify-content:flex-start; } .game-grid { grid-template-columns:1fr; } .path { grid-template-columns:repeat(2,1fr); } }
+  </style>
+  <link rel="stylesheet" href="mobile.css">
+</head>
+<body>
+  <main class="page">
+    <nav class="site-nav" aria-label="Навігація сайту">
+      <a class="site-brand" href="games.html" aria-current="page">IT LAB · Ігри</a>
+    </nav>
+
+    <header class="hero">
+      <div class="eyebrow">Симулятор програміста · 10 хвилин</div>
+      <h1>Ігри, у яких код стає результатом</h1>
+      <p>Спробуй алгоритми, debugging, web, умови та цикли у коротких графічних випробуваннях для майбутніх програмістів.</p>
+    </header>
+
+    <section class="section">
+      <h2 class="section-title">🎮 Обери випробування</h2>
+      <p class="section-subtitle">Обирай випробування — кожна картка відкриває окрему сторінку гри.</p>
+      <div class="game-grid">
+        <article class="game-card"><div class="game-icon">🐛</div><h3>Зламай код</h3><p>Знайди синтаксичну, логічну або алгоритмічну помилку та виправ програму.</p><div class="game-meta"><span class="tag">Debugging</span><span class="tag">Логіка</span></div><a class="game-button" href="game-debug.html">Запустити гру →</a></article>
+        <article class="game-card"><div class="game-icon">🚀</div><h3>Космічний програміст</h3><p>Керуй кораблем командами MOVE, TURN і FOR, щоб дістатися порталу.</p><div class="game-meta"><span class="tag">Цикли</span><span class="tag">Команди</span></div><a class="game-button" href="game-space.html">Запустити гру →</a></article>
+        <article class="game-card"><div class="game-icon">🏭</div><h3>Програміст на заводі</h3><p>Запрограмуй сортувальник, який розподіляє предмети за кольорами.</p><div class="game-meta"><span class="tag">Умови</span><span class="tag">Автоматизація</span></div><a class="game-button" href="game-factory.html">Запустити гру →</a></article>
+        <article class="game-card"><div class="game-icon">🌐</div><h3>Збери свій сайт</h3><p>Склади структуру сторінки з HTML-елементів і побач результат у браузері.</p><div class="game-meta"><span class="tag">HTML</span><span class="tag">Web</span></div><a class="game-button" href="game-web.html">Запустити гру →</a></article>
+        <article class="game-card"><div class="game-icon">🎨</div><h3>CSS-магія</h3><p>Змінюй кольори, форму та анімації кнопки за допомогою CSS-властивостей.</p><div class="game-meta"><span class="tag">CSS</span><span class="tag">Дизайн</span></div><a class="game-button" href="game-css.html">Запустити гру →</a></article>
+        <article class="game-card"><div class="game-icon">🕵️</div><h3>Кібердетектив</h3><p>Проаналізуй лог подій, знайди підозрілу дію та віднови правильну конфігурацію.</p><div class="game-meta"><span class="tag">Кібербезпека</span><span class="tag">Аналіз</span></div><a class="game-button" href="game-cyber.html">Запустити гру →</a></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">🧠 Твій маршрут</h2>
+      <p class="section-subtitle">Кожна гра показує окрему частину роботи програміста.</p>
+      <div class="path">
+        <div class="path-step"><span>🤖</span><strong>Алгоритми</strong></div>
+        <div class="path-step"><span>🐛</span><strong>Debug</strong></div>
+        <div class="path-step"><span>🌐</span><strong>Web</strong></div>
+        <div class="path-step"><span>🏭</span><strong>Автоматизація</strong></div>
+        <div class="path-step"><span>🚀</span><strong>Цикли</strong></div>
+      </div>
+      <div class="cta">
+        <h2>Спробуй себе у програмуванні</h2>
+        <p>Тут немає оцінки «добре» чи «погано». Є тільки цікавість, експеримент і твій перший алгоритм.</p>
+        <button class="certificate-button" id="open-certificate" type="button">🎓 Отримати іменний сертифікат</button>
+      </div>
+    </section>
+
+    <div class="certificate-modal" id="certificate-modal" aria-hidden="true">
+      <section class="certificate-card" role="dialog" aria-modal="true" aria-labelledby="certificate-title">
+        <button class="game-modal-close" id="certificate-close" type="button" aria-label="Закрити">&times;</button>
+        <h2 id="certificate-title">🏅 Генерація сертифіката</h2>
+        <p>Введіть ім’я та прізвище, щоб створити персональний сертифікат проходження IT LAB.</p>
+        <form class="certificate-form" id="certificate-form">
+          <input id="certificate-name" type="text" maxlength="60" autocomplete="name" placeholder="Ваше ім’я та прізвище" aria-label="Ім’я та прізвище">
+          <button class="certificate-button" type="submit">Згенерувати</button>
+        </form>
+        <p class="certificate-status" id="certificate-status" aria-live="polite"></p>
+        <canvas id="certificate-canvas" width="1200" height="800" hidden></canvas>
+        <div class="certificate-actions">
+          <button id="download-certificate" type="button">📥 Завантажити сертифікат (PNG)</button>
+          <button class="secondary" id="print-certificate" type="button">🖨️ Роздрукувати</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="game-progress.js"></script>
+  <script>
+    const certificateModal = document.getElementById("certificate-modal");
+    const certificateCanvas = document.getElementById("certificate-canvas");
+    const certificateName = document.getElementById("certificate-name");
+    const certificateStatus = document.getElementById("certificate-status");
+    const certificateLogo = new Image();
+    certificateLogo.onload = () => {
+      if (certificateModal.classList.contains("open")) drawCertificate();
+    };
+    certificateLogo.onerror = () => {
+      certificateStatus.textContent = "Не вдалося завантажити логотип сертифіката.";
+    };
+    certificateLogo.src = "certificate-logo.webp";
+
+    function drawCertificate() {
+      const context = certificateCanvas.getContext("2d");
+      if (!context) {
+        certificateStatus.textContent = "Браузер не підтримує створення зображення сертифіката.";
+        return;
+      }
+
+      const name = certificateName.value.trim() || "Учасник IT LAB";
+      const results = window.ITLabProgress.getSummary();
+      const issued = new Date().toLocaleDateString("uk-UA", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric"
+      });
+      certificateCanvas.width = 1200;
+      certificateCanvas.height = 800;
+
+      const background = context.createLinearGradient(0, 0, 1200, 800);
+      background.addColorStop(0, "#071a42");
+      background.addColorStop(0.48, "#0a2457");
+      background.addColorStop(1, "#06132f");
+      context.fillStyle = background;
+      context.fillRect(0, 0, 1200, 800);
+
+      const glowLeft = context.createRadialGradient(210, 180, 20, 210, 180, 350);
+      glowLeft.addColorStop(0, "rgba(37,99,235,.22)");
+      glowLeft.addColorStop(1, "rgba(37,99,235,0)");
+      context.fillStyle = glowLeft;
+      context.fillRect(0, 0, 600, 500);
+      const glowRight = context.createRadialGradient(1000, 680, 20, 1000, 680, 350);
+      glowRight.addColorStop(0, "rgba(124,58,237,.18)");
+      glowRight.addColorStop(1, "rgba(124,58,237,0)");
+      context.fillStyle = glowRight;
+      context.fillRect(650, 450, 550, 350);
+      drawCircuitDecoration(context);
+
+      context.strokeStyle = "#fbbf24";
+      context.lineWidth = 10;
+      context.strokeRect(24, 24, 1152, 752);
+      context.strokeStyle = "#2563eb";
+      context.lineWidth = 2;
+      context.strokeRect(38, 38, 1124, 724);
+      context.strokeStyle = "rgba(6,182,212,.65)";
+      context.strokeRect(46, 46, 1108, 708);
+      context.fillStyle = "#fbbf24";
+      context.fillRect(24, 24, 52, 52);
+      context.fillRect(1124, 24, 52, 52);
+      context.fillRect(24, 724, 52, 52);
+      context.fillRect(1124, 724, 52, 52);
+      context.fillStyle = "#2563eb";
+      context.fillRect(76, 24, 34, 8);
+      context.fillRect(1090, 24, 34, 8);
+      context.fillRect(76, 768, 34, 8);
+      context.fillRect(1090, 768, 34, 8);
+
+      if (certificateLogo.complete && certificateLogo.naturalWidth) {
+        context.save();
+        context.beginPath();
+        context.arc(66 + 145 / 2, 65 + 145 / 2, 145 / 2 + 7, 0, Math.PI * 2);
+        context.fillStyle = "#ffffff";
+        context.fill();
+        context.strokeStyle = "#fbbf24";
+        context.lineWidth = 2;
+        context.stroke();
+        context.beginPath();
+        context.arc(66 + 145 / 2, 65 + 145 / 2, 145 / 2 + 2, 0, Math.PI * 2);
+        context.clip();
+        context.drawImage(certificateLogo, 66, 65, 145, 145);
+        context.restore();
+      }
+
+      context.textAlign = "center";
+      context.fillStyle = "#f8fafc";
+      context.font = '700 22px "Manrope", sans-serif';
+      context.fillText('ВСП "ЗЕФК НУ «ЗАПОРІЗЬКА ПОЛІТЕХНІКА»"', 670, 92);
+      context.fillStyle = "#8fb5ff";
+      context.font = '700 18px "Manrope", sans-serif';
+      context.fillText('Спеціальність 121 «Інженерія програмного забезпечення»', 670, 124);
+      context.shadowColor = "rgba(251,191,36,.35)";
+      context.shadowBlur = 18;
+      context.fillStyle = "#fbbf24";
+      context.font = '900 58px "Manrope", sans-serif';
+      context.fillText("СЕРТИФІКАТ", 600, 210);
+      context.shadowBlur = 0;
+      context.fillStyle = "#f8fafc";
+      context.font = '500 23px "Manrope", sans-serif';
+      context.fillText("засвідчує, що", 600, 252);
+      let nameFontSize = 52;
+      context.font = `800 ${nameFontSize}px "Manrope", sans-serif`;
+      while (context.measureText(name).width > 850 && nameFontSize > 18) {
+        nameFontSize -= 1;
+        context.font = `800 ${nameFontSize}px "Manrope", sans-serif`;
+      }
+      context.shadowColor = "rgba(6,182,212,.35)";
+      context.shadowBlur = 18;
+      context.fillStyle = "#22d3ee";
+      context.fillText(name, 600, 330);
+      context.shadowBlur = 0;
+      context.strokeStyle = "#2563eb";
+      context.lineWidth = 2;
+      context.beginPath();
+      context.moveTo(350, 365);
+      context.lineTo(850, 365);
+      context.stroke();
+      context.beginPath();
+      context.arc(600, 365, 4, 0, Math.PI * 2);
+      context.fillStyle = "#22d3ee";
+      context.fill();
+      context.fillStyle = "#f1f5f9";
+      context.font = '500 20px "Manrope", sans-serif';
+      context.fillText("успішно пройшов(ла) інтерактивні практики та завдання в межах", 600, 415);
+      context.fillStyle = "#a78bfa";
+      context.font = '800 27px "Manrope", sans-serif';
+      context.fillText("🎮 Профорієнтаційного інтенсиву «IT LAB»", 600, 462);
+
+      context.beginPath();
+      context.moveTo(438, 505);
+      context.lineTo(762, 505);
+      context.arcTo(780, 505, 780, 523, 18);
+      context.lineTo(780, 575);
+      context.arcTo(780, 593, 762, 593, 18);
+      context.lineTo(438, 593);
+      context.arcTo(420, 593, 420, 575, 18);
+      context.lineTo(420, 523);
+      context.arcTo(420, 505, 438, 505, 18);
+      context.closePath();
+      const badge = context.createLinearGradient(420, 505, 780, 593);
+      badge.addColorStop(0, "rgba(15,35,70,.95)");
+      badge.addColorStop(1, "rgba(19,31,61,.95)");
+      context.fillStyle = badge;
+      context.fill();
+      context.strokeStyle = "#fbbf24";
+      context.lineWidth = 2;
+      context.stroke();
+      context.fillStyle = "#fbbf24";
+      context.font = '800 26px "Manrope", sans-serif';
+      context.fillText(`Здобуто досвіду: ${results.xp} XP ★`, 600, 559);
+      context.textAlign = "left";
+      context.fillStyle = "#9fb7df";
+      context.font = '500 17px "Manrope", sans-serif';
+      context.fillText(`Дата видачі: ${issued}`, 75, 720);
+      context.textAlign = "right";
+      context.fillText("Організаційний комітет IT LAB", 1125, 720);
+      certificateStatus.textContent = `Результат: ${results.xp} XP · завершено ігор: ${results.completedGames}.`;
+    }
+
+    function drawCircuitDecoration(context) {
+      context.save();
+      context.strokeStyle = "rgba(37,99,235,.28)";
+      context.lineWidth = 3;
+      context.lineCap = "round";
+      const paths = [
+        [[48, 270], [105, 327], [105, 410], [150, 455]],
+        [[48, 325], [82, 359], [82, 505], [140, 563]],
+        [[1152, 250], [1090, 312], [1090, 395], [1040, 445]],
+        [[1152, 520], [1110, 562], [1110, 650], [1050, 710]]
+      ];
+      paths.forEach((points) => {
+        context.beginPath();
+        points.forEach(([x, y], index) => {
+          if (index === 0) context.moveTo(x, y);
+          else context.lineTo(x, y);
+        });
+        context.stroke();
+        const [x, y] = points[points.length - 1];
+        context.beginPath();
+        context.arc(x, y, 7, 0, Math.PI * 2);
+        context.fillStyle = "#2563eb";
+        context.fill();
+      });
+      context.fillStyle = "rgba(6,182,212,.75)";
+      [[72,650],[92,650],[112,650],[72,670],[92,670],[112,670],
+       [1080,210],[1100,210],[1120,210],[1080,230],[1100,230],[1120,230],
+       [1080,250],[1100,250],[1120,250]].forEach(([x, y]) => {
+        context.beginPath();
+        context.arc(x, y, 2.5, 0, Math.PI * 2);
+        context.fill();
+      });
+      context.restore();
+    }
+
+    function openCertificate() {
+      certificateModal.classList.add("open");
+      certificateModal.setAttribute("aria-hidden", "false");
+      drawCertificate();
+      certificateName.focus();
+    }
+
+    function closeCertificate() {
+      certificateModal.classList.remove("open");
+      certificateModal.setAttribute("aria-hidden", "true");
+    }
+
+    document.getElementById("open-certificate").addEventListener("click", openCertificate);
+    document.getElementById("certificate-close").addEventListener("click", closeCertificate);
+    document.getElementById("certificate-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      drawCertificate();
+    });
+    certificateName.addEventListener("input", () => {
+      if (certificateModal.classList.contains("open")) drawCertificate();
+    });
+    certificateModal.addEventListener("click", (event) => {
+      if (event.target === certificateModal) closeCertificate();
+    });
+    document.getElementById("download-certificate").addEventListener("click", () => {
+      drawCertificate();
+      certificateCanvas.toBlob((blob) => {
+        if (!blob) {
+          certificateStatus.textContent = "Не вдалося створити PNG сертифіката.";
+          return;
+        }
+        const downloadUrl = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        const safeName = certificateName.value.trim().replace(/[^\p{L}\p{N}]+/gu, "_").replace(/^_|_$/g, "");
+        link.href = downloadUrl;
+        link.download = `Certificate_IT_LAB${safeName ? `_${safeName}` : ""}.png`;
+        link.click();
+        URL.revokeObjectURL(downloadUrl);
+      }, "image/png");
+    });
+    document.getElementById("print-certificate").addEventListener("click", () => {
+      drawCertificate();
+      const printFrame = document.createElement("iframe");
+      printFrame.title = "Друк сертифіката IT LAB";
+      printFrame.setAttribute("aria-hidden", "true");
+      printFrame.style.position = "fixed";
+      printFrame.style.right = "0";
+      printFrame.style.bottom = "0";
+      printFrame.style.width = "0";
+      printFrame.style.height = "0";
+      printFrame.style.border = "0";
+
+      const printDocument = printFrame.contentDocument;
+      const printWindow = printFrame.contentWindow;
+      if (!printDocument || !printWindow) {
+        certificateStatus.textContent = "Не вдалося підготувати сертифікат до друку.";
+        return;
+      }
+
+      const printStyle = printDocument.createElement("style");
+      printStyle.textContent = "@page{size:A4 landscape;margin:0}html,body{margin:0;width:100%;height:100%}body{display:flex;align-items:center;justify-content:center}img{width:100%;height:auto}";
+      printDocument.head.append(printStyle);
+
+      const image = printDocument.createElement("img");
+      image.alt = "Сертифікат IT LAB";
+      image.onload = () => {
+        const cleanup = () => printFrame.remove();
+        printWindow.addEventListener("afterprint", cleanup, { once: true });
+        printWindow.focus();
+        printWindow.print();
+        window.setTimeout(cleanup, 60000);
+      };
+      image.onerror = () => {
+        printFrame.remove();
+        certificateStatus.textContent = "Не вдалося завантажити сертифікат для друку.";
+      };
+      image.src = certificateCanvas.toDataURL("image/png");
+      printDocument.body.replaceChildren(image);
+      document.body.append(printFrame);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      if (certificateModal.classList.contains("open")) closeCertificate();
+    });
+  </script>
+</body>
+</html>
