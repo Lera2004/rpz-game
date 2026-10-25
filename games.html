@@ -140,7 +140,7 @@
       const context = certificateCanvas.getContext("2d");
       if (!context) {
         certificateStatus.textContent = "Браузер не підтримує створення зображення сертифіката.";
-        return;
+        return false;
       }
 
       const name = certificateName.value.trim() || "Учасник IT LAB";
@@ -280,6 +280,7 @@
       context.textAlign = "right";
       context.fillText("Організаційний комітет IT LAB", 1125, 720);
       certificateStatus.textContent = `Результат: ${results.xp} XP · зіграно ігор: ${results.playedGames} · завершено: ${results.completedGames}.`;
+      return true;
     }
 
     function drawCircuitDecoration(context) {
@@ -333,7 +334,9 @@
     document.getElementById("certificate-close").addEventListener("click", closeCertificate);
     document.getElementById("certificate-form").addEventListener("submit", (event) => {
       event.preventDefault();
-      drawCertificate();
+      if (drawCertificate()) {
+        certificateStatus.textContent = "Сертифікат успішно згенеровано! Його можна завантажити або роздрукувати.";
+      }
     });
     certificateName.addEventListener("input", () => {
       if (certificateModal.classList.contains("open")) drawCertificate();
